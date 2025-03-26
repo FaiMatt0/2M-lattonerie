@@ -7,27 +7,27 @@
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <link rel="stylesheet" href="styles/style.css">
         <title>2M Lattonerie SRLS</title>
-        <link rel="icon" href="images/mini logo no bg.png" type="image/x-icon">
+        <link rel="icon" href="images/minilogonobg.png" type="image/x-icon">
     </head>
     <body>
         <main>
             <aside>
                 <ul class="Links">
-                <li onclick="Navigate(0)" class="activeLink"><i class="fa-solid fa-house"></i>
-                    <p>Home</p>
-                </li>
-                <li onclick="Navigate(1)"><i class="fa-solid fa-book-open"></i>
-                    <p>Chi siamo</p>
-                </li>
-                <li onclick="Navigate(2)"><i class="fa-solid fa-list"></i>
-                    <p>Servizi</p>
-                </li>
-                <li onclick="Navigate(3)"><i class="fa-solid fa-tools"></i>
-                    <p>Lavori eseguiti</p>
-                </li>
-                <li onclick="Navigate(4)"><i class="fa-solid fa-comments"></i>
-                    <p>Contatti</p>
-                </li>
+                    <li onclick="Navigate(0)" class="activeLink"><i class="fa-solid fa-house"></i>
+                        <p>Home</p>
+                    </li>
+                    <li onclick="Navigate(1)"><i class="fa-solid fa-book-open"></i>
+                        <p>Chi siamo</p>
+                    </li>
+                    <li onclick="Navigate(2)"><i class="fa-solid fa-list"></i>
+                        <p>Servizi</p>
+                    </li>
+                    <li onclick="Navigate(3)"><i class="fa-solid fa-tools"></i>
+                        <p>Lavori eseguiti</p>
+                    </li>
+                    <li onclick="Navigate(4)"><i class="fa-solid fa-comments"></i>
+                        <p>Contatti</p>
+                    </li>
                 </ul>
             </aside>
             <div class="swiper mySwiper">
@@ -36,7 +36,10 @@
                         <div class="HomeContent">
                             <h1>"Da anni al vostro fianco, con <span class="stylized-name">PRECISIONE E QUALITÀ</span>,</h1>
                             <h2>per lavorazioni che <span class="proffesions">SFIDANO IL TEMPO"</span></h2>
-                            <div class="buttonGroup" ><button class="sudinoi-btn">Su di noi</button><button class="contattaci-btn">Contattaci</button></div>
+                            <div class="buttonGroup">
+                                <button class="sudinoi-btn" onclick="Navigate(1)">Su di noi</button>
+                                <button class="contattaci-btn" onclick="Navigate(4)">Contattaci</button>
+                            </div>
                         </div>
                         <div class="SideImg">
                             <div class="top-right-corner">
@@ -81,9 +84,10 @@
                                 <em>Contattaci per scoprire come possiamo trasformare le tue IDEE IN REALTÀ."</em>
                             </p>
                         </p>
-        
-                                <div class="buttonGroup"><button class="iNostiLavori-btn">I nostri lavori</button><button class="contattaci-btn">Contattaci</button></div>
-
+                        <div class="buttonGroup">
+                            <button class="iNostriLavori-btn" onclick="Navigate(3)">I nostri lavori</button>
+                            <button class="contattaci-btn" onclick="Navigate(4)">Contattaci</button>
+                        </div>
                     </div>
                 </div>
                     <div class="swiper-slide services">
@@ -147,9 +151,9 @@
                         </div>
                         <form>
                             <h2>Invia un messaggio <div class="SocialLinks">
-                                    <i class="fa-brands fa-linkedin"></i>
-                                    <i class="fa-brands fa-instagram"></i>
-                                    <i class="fa-brands fa-facebook"></i>
+                                    <a href="pages/workinprogress.html"><i class="fa-brands fa-linkedin"></i></a>
+                                    <a href="pages/workinprogress.html"></a><i class="fa-brands fa-instagram"></i></a>
+                                    <a href="pages/workinprogress.html"></a><i class="fa-brands fa-facebook"></i></a>
                                 </div>
                             </h2>
                             <input type="text" placeholder="Nome">

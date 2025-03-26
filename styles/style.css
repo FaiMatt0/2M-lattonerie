@@ -482,14 +482,15 @@ aside li i {
     font-size: 1.1rem;
     border: none;
     color: white;
-    background-color: #212529;
+    background-color: #4b595c;
 
 }
 
 .contactMe form input:focus {
-    border: 1px solid #f39c12;
+    border: 1px solid #4b595c;
     outline: none;
-
+    background-color: #f39c12;
+    color: #293133;
 }
 
 .contactMe form textarea {
@@ -503,7 +504,7 @@ aside li i {
     border:none;
     border: none;
     color:white;
-    background-color: #212529;
+    background-color: #4b595c;
 }
 
 .contactMe form textarea:focus {
@@ -512,10 +513,15 @@ aside li i {
     color: #293133;
 }
 
+
 .contactMe button{
     grid-column: 1/span 2;
     margin:20px auto ;
+}
 
+.contactMe button:hover{
+    background-color: #293133;
+    color: #f39c12;
 }
 
 footer{
@@ -523,7 +529,7 @@ footer{
     bottom:0px;
     right:0px;
     text-align: center;
-    color:white;
+    color:#293133;
     width:100%;
     font-weight: 200;
     font-size: 0.8rem;
@@ -538,7 +544,7 @@ form h2 .SocialLinks{
     width:fit-content;
     margin-left:auto;
     margin-right:10px;
-    background-color: #212529;
+    background-color: #4b595c;
     border-radius: 30px;
 }
 
@@ -549,9 +555,14 @@ form h2 .SocialLinks i{
 }
 
 form h2 .SocialLinks i:hover{
-    background-color: whitesmoke;
+    background-color: #293133;
 }
 
 .about-us{
     overflow: auto;
+}
+
+.buttonGroup button:hover {
+    background-color: #293133;
+    color: #f39c12;
 }
