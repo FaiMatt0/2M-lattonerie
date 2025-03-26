@@ -24,7 +24,7 @@ aside {
     flex-direction: column;
     height: 100%;
     font-size: 1.1rem;
-    background-color: #212529;
+    background-color: #293133;
     backdrop-filter: blur(20px);
 }
 
@@ -47,7 +47,7 @@ aside li {
 }
 
 aside li:hover {
-    color: #80ed99;
+    color: #f39c12;
 }
 
 aside li::after {
@@ -63,16 +63,18 @@ aside li::after {
 aside li i {
     font-size: 1.3rem;
 }
+
 .activeLink{
-    color:#80ed99
+    color:#f39c12
 }
+
 .mySwiper {
     flex: 1;
     height: 100%;
 }
 
 .home-slide {
-    color: white;
+    color: #293133;
     display: flex;
     background-color: #343a40;
     padding-right: 6rem;
@@ -117,7 +119,7 @@ aside li i {
     width: 150px;
     height: 10px;
     border: none;
-    background: #80ed99;
+    background: #f39c12;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
@@ -127,7 +129,7 @@ aside li i {
     height: 120px;
     border-bottom-left-radius: 3px;
 
-    background: #80ed99;
+    background: #f39c12;
     border: none;
     border-bottom-right-radius: 3px;
 }
@@ -147,11 +149,11 @@ aside li i {
 
 .HomeContent h1 .stylized-name {
     font-weight: 700;
-    color: #80ed99;
+    color: #f39c12;
 }
 
 .proffesions {
-    color: #85f69f;
+    color: #f39c12;
 }
 
 .HomeContent .heroline {
@@ -174,8 +176,8 @@ aside li i {
     font-weight: 500;
     margin: 5px;
     cursor: pointer;
-    background-color: #1d8637;
-    color: white;
+    background-color: #f39c12;
+    color: #293133;
     border-radius: 5px;
     transition: 0.3rem;
 }
@@ -186,8 +188,8 @@ aside li i {
 }
 .contactMe-btn:hover,
 .hireMe-btn:hover{
-    background-color: white;
-    color: #1d8637;;
+    background-color: #293133;
+    color: #f39c12;;
   
 }
 
@@ -208,13 +210,13 @@ aside li i {
     width: 80vw;
     height: 100vh;
     overflow: hidden;
-    background-color: #343a40;
+    background-color: white;
 }
 
 .swiper-slide {
     width: 100%;
     height: 100%;
-    background-color: #343a40;
+    background-color: whitesmoke;
 }
 
 .about-us {
@@ -222,14 +224,14 @@ aside li i {
     height:100%;
     padding: 100px;
     padding-top: 7rem;
-    color: white;
+    color: #293133;
 }
 
 .heading {
     padding: 20px 10px;
     font-size: 2.5rem;
     top: 3rem;
-    color: #80ed99;
+    color: #f39c12;
 }
 .about-us .heading{
     position: absolute;
@@ -271,7 +273,7 @@ aside li i {
 }
 
 .about-me-table span {
-    color: #80ed99;
+    color: #f39c12;
     font-weight: bold;
     margin-right: 5px;
 }
@@ -293,7 +295,7 @@ aside li i {
 }
 
 .skill-bar p {
-    color: #80ed99;
+    color: #f39c12;
     font-weight: bold;
     margin: 10px;
 }
@@ -307,14 +309,14 @@ aside li i {
 }
 
 .active-bar {
-    background-color: #80ed99;
+    background-color: #d88b0e;
     height: 100%;
     width: auto;
     border-radius: 20px;
 }
 
 .services {
-    color: white;
+    color: #293133;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 100px ;
@@ -333,7 +335,7 @@ aside li i {
     text-align: center;
     justify-content: center;
     height: 20rem;
-    background-color: rgba(0, 0, 0, 0.437);
+    background-color: #4b595c;
     border-radius: 5px;
     margin: 1rem;
     margin-top: 6rem;
@@ -346,23 +348,30 @@ aside li i {
 
 .services .service i {
     font-size: 3rem;
-    color:#80ed99
+    color:#f39c12
 }
 
 .services .service .service-icon {
     border-radius: 5px;
     margin: 20px auto;
 }
+
+.service p {
+    color: white;
+}
+
 .service h2{
-    color:#80ed99;
+    color:#f39c12;
     margin-bottom: 1rem;
 }
+
 .service:hover {
-    background-color: #80ed99;
-    color: #176d2d
+    background-color: #f39c12;
+    color: #293133;
 }
+
 .service:hover h2,.service:hover i{
-    color: #176d2d
+    color: #293133;
 }
 
 .gallery {
@@ -378,7 +387,7 @@ aside li i {
 }
 
 .gallery h2 {
-    color: white;
+    color: #293133;
     font-weight: 600;
     font-size: 1.5rem;
     padding: 20px 10px;
@@ -430,7 +439,7 @@ aside li i {
 .contactinfo {
     display: flex;
     flex-direction: column;
-    color: white;
+    color: #293133;
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -439,23 +448,25 @@ aside li i {
 
 .contactinfo i {
     font-size: 2rem;
-    color: #80ed99;
+    color: #f39c12;
     padding-bottom: 0.6rem;
 }
 
 .contactinfo h3 {
-    color: #80ed99;
+    color: #f39c12;
 }
+
 .contactinfo p{
     font-size: 0.9rem;
 }
+
 .contactMe form {
     display: grid;
     grid-template-columns: 50% 50%;
     width: 100%;
     padding: 20px;
     height: fit-content;
-    color: white;
+    color: #f39c12;
 }
 
 .contactMe form h2 {
@@ -476,7 +487,7 @@ aside li i {
 }
 
 .contactMe form input:focus {
-    border: 1px solid #85f69f;
+    border: 1px solid #f39c12;
     outline: none;
 
 }
@@ -496,13 +507,17 @@ aside li i {
 }
 
 .contactMe form textarea:focus {
-    border: 1px solid #85f69f !important;
+    border: 1px solid #293133 !important;
+    background-color: #f39c12;
+    color: #293133;
 }
+
 .contactMe button{
     grid-column: 1/span 2;
     margin:20px auto ;
 
 }
+
 footer{
     position:absolute;
     bottom:0px;
@@ -513,9 +528,11 @@ footer{
     font-weight: 200;
     font-size: 0.8rem;
 }
+
 footer li{
     padding:10px;
 }
+
 form h2 .SocialLinks{
     padding:5px;
     width:fit-content;
@@ -524,14 +541,17 @@ form h2 .SocialLinks{
     background-color: #212529;
     border-radius: 30px;
 }
+
 form h2 .SocialLinks i{
     padding:10px;
     border-radius: 50%;
     transition-duration: 0.25s;
 }
+
 form h2 .SocialLinks i:hover{
-    background-color: #176d2d;
+    background-color: whitesmoke;
 }
+
 .about-us{
     overflow: auto;
 }
