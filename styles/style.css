@@ -450,6 +450,7 @@ aside li i {
     padding: 100px ;
     padding-top: 7rem;
     box-sizing: border-box;
+    align-items: center;
 }
 
 .services .heading {
