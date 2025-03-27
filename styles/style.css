@@ -285,8 +285,169 @@ aside li i {
     flex: 1;
 }
 
-.skill-bar {
+.about-us-citation {
+    position: absolute;
+    bottom: 120px;
+    right: 0;
+    padding: 25px 40px;
+    background-color: #f39c12;
+    border-radius: 5px 0 0 5px;
+    width: 400px;
+    height: auto;
+    min-height: 80px; /* Altezza minima iniziale (uguale a prima) */
+    margin: 0;
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.2);
+    z-index: 10;
+    transform: translateX(1px);
+    transition: 
+        width 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+        min-height 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.1s,
+        bottom 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.1s,
+        padding 0.6s ease;
+    overflow: hidden;
+}
+
+.about-us-citation h2 {
+    color: white;
+}
+
+/* Contenitore immagini - nascosto completamente inizialmente */
+.image-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease 0.4s; /* Dopo l'espansione */
+}
+
+/* Righe immagini - nascoste inizialmente */
+.image-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+/* Immagini individuali */
+.citation-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s ease;
+    transition: all 0.4s ease, transform 0.3s ease !important;
+    position: relative;
+    z-index: 1;
+}
+
+.bottom-images .citation-image:hover {
+    transform: scale(2.5) translateY(-30%) !important;
+    z-index: 20;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border: 3px solid white;
+}
+
+.top-images .citation-image:hover {
+    transform: scale(2.5) translateY(+30%) !important;
+    z-index: 20;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border: 3px solid white;
+}
+
+.top-images {
+    position: relative;
+    z-index: 1;
+    transition: z-index 0s; /* Rimuovi il delay */
+}
+
+.bottom-images {
+    position: relative;
+    z-index: 0;
+    transition: z-index 0s; /* Rimuovi il delay */
+}
+
+/* Cambia immediatamente lo z-index al passaggio del mouse */
+.top-images:hover,
+.top-images:hover ~ .bottom-images {
+    transition: z-index 0s;
+}
+
+.bottom-images:hover,
+.bottom-images:hover ~ .top-images {
+    transition: z-index 0s;
+}
+
+/* Aggiungi questa regola per gestire il contenitore */
+.image-container {
+    position: relative;
+    z-index: 0;
+}
+.top-images:hover {
+    z-index: 100;
+}
+
+.bottom-images:hover {
+    z-index: 100;
+}
+
+.top-images:hover ~ .bottom-images {
+    z-index: 0;
+}
+
+.citation-image:hover {
+    z-index: 200;
+    transition: transform 0.3s ease, z-index 0s; /* Separa le transizioni */
+}
+
+/* Stato hover */
+.about-us-citation:hover {
+    width: 1000px;
+    min-height: 300px;
+    bottom: 100px;
+    padding: 40px;
+}
+
+.about-us-citation:hover .image-container {
+    max-height: 500px; /* Altezza sufficiente per le immagini */
+}
+
+.about-us-citation:hover .image-row {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+}
+
+/* Animazione a scalare delle immagini */
+.about-us-citation:hover .citation-image:nth-child(1) { transition-delay: 0.6s; opacity: 1; transform: scale(1); }
+.about-us-citation:hover .citation-image:nth-child(2) { transition-delay: 0.7s; opacity: 1; transform: scale(1); }
+.about-us-citation:hover .citation-image:nth-child(3) { transition-delay: 0.8s; opacity: 1; transform: scale(1); }
+.about-us-citation:hover .citation-image:nth-child(4) { transition-delay: 0.9s; opacity: 1; transform: scale(1); }
+.about-us-citation:hover .citation-image:nth-child(5) { transition-delay: 1.0s; opacity: 1; transform: scale(1); }
+.kill-bar {
     width: calc(40% - 20px);
+}
+
+.many-more {
+    position: absolute;
+    bottom: 15px;
+    right: 40px;
+    font-style: italic;
+    color: white;
+    font-size: 1.5em;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
+}
+
+.about-us-citation:hover .many-more {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 1.2s; /* Dopo che tutte le immagini sono apparse */
 }
 
 .skill-bar li {
@@ -552,6 +713,7 @@ form h2 .SocialLinks i{
     padding:10px;
     border-radius: 50%;
     transition-duration: 0.25s;
+    color: #f39c12;
 }
 
 form h2 .SocialLinks i:hover{
