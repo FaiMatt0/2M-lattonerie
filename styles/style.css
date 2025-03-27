@@ -371,39 +371,6 @@ aside li i {
     transition: z-index 0s; /* Rimuovi il delay */
 }
 
-/* Cambia immediatamente lo z-index al passaggio del mouse */
-.top-images:hover,
-.top-images:hover ~ .bottom-images {
-    transition: z-index 0s;
-}
-
-.bottom-images:hover,
-.bottom-images:hover ~ .top-images {
-    transition: z-index 0s;
-}
-
-/* Aggiungi questa regola per gestire il contenitore */
-.image-container {
-    position: relative;
-    z-index: 0;
-}
-.top-images:hover {
-    z-index: 100;
-}
-
-.bottom-images:hover {
-    z-index: 100;
-}
-
-.top-images:hover ~ .bottom-images {
-    z-index: 0;
-}
-
-.citation-image:hover {
-    z-index: 200;
-    transition: transform 0.3s ease, z-index 0s; /* Separa le transizioni */
-}
-
 /* Stato hover */
 .about-us-citation:hover {
     width: 1000px;
