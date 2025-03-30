@@ -38,52 +38,88 @@ document.addEventListener('DOMContentLoaded', function() {
             title: "Pluviali e grondaie",
             content: "<p>Sistemi completi per acque meteoriche:</p><ul><li>Grondaie in rame, alluminio e PVC</li><li>Pluviali con filtri anti-foglia</li><li>Sistemi di raccolta acqua piovana</li><li>Manutenzione e pulizia periodica</li></ul>"
         }
-    ];
+    ];    
+});
 
-    // Funzioni per il modal dei servizi
-    function openService(index) {
-        const modal = document.getElementById('serviceModal');
-        document.getElementById('modalTitle').textContent = servicesData[index].title;
-        document.getElementById('modalContent').innerHTML = servicesData[index].content;
-        modal.style.display = "block";
+//services
+const servicesData = [
+    {
+        title: "Coperture civili e industriali",
+        content: "<p>Realizziamo coperture complete per ogni esigenza:</p><ul><li>Tetti in laterizio e metallo</li><li>Coperture ventilate</li><li>Soluzioni isolanti termo-acustiche</li><li>Strutture industriali personalizzate</li></ul>"
+    },
+    {
+        title: "Lucernari e abbaini", 
+        content: "<p>Soluzioni per illuminazione naturale:</p><ul><li>Lucernari fissi e apribili</li><li>Abbaini su misura</li><li>Vetri di sicurezza</li><li>Sistemi di ventilazione integrati</li></ul>"
+    },
+    {
+        title: "Pluviali e grondaie",
+        content: "<p>Sistemi completi per acque meteoriche:</p><ul><li>Grondaie in rame, alluminio e PVC</li><li>Pluviali con filtri anti-foglia</li><li>Sistemi di raccolta acqua piovana</li><li>Manutenzione e pulizia periodica</li></ul>"
     }
+];
 
-    function closeService() {
-        document.getElementById('serviceModal').style.display = "none";
+function openService(index) {
+    const box = document.getElementById('serviceBoxMobile');
+    const overlay = document.createElement('div');
+    overlay.className = 'service-box-overlay active';
+    document.body.appendChild(overlay);
+    
+    document.getElementById('serviceBoxTitle').textContent = servicesData[index].title;
+    document.getElementById('serviceBoxContent').innerHTML = servicesData[index].content;
+    
+    box.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Chiudi cliccando sull'overlay
+    overlay.addEventListener('click', closeServiceBox);
+}
+
+function closeServiceBox() {
+    const box = document.getElementById('serviceBoxMobile');
+    const overlay = document.querySelector('.service-box-overlay');
+    
+    box.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    
+    if (overlay) {
+        setTimeout(() => {
+            overlay.remove();
+        }, 400);
     }
+}
 
-    // Chiudi modal cliccando fuori
-    window.onclick = function(event) {
-        const modal = document.getElementById('serviceModal');
-        if (event.target == modal) {
-            closeService();
-        }
+// Chiudi con tasto indietro su Android
+document.addEventListener('backbutton', closeServiceBox, false);
+
+// Chiudi con tasto ESC su browser
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('serviceBoxMobile').classList.contains('active')) {
+        closeServiceBox();
     }
+});
 
-    // Navigazione da URL hash
-    if (window.location.hash) {
-        const targetIndex = {
-            '#home': 0,
-            '#about': 1,
-            '#services': 2,
-            '#gallery': 3,
-            '#contact': 4
-        }[window.location.hash];
-        
-        if (targetIndex !== undefined) {
-            swiper.slideTo(targetIndex);
-        }
-    }
+// Simple Image Zoom con titolo
+const zoomContainer = document.getElementById('simpleZoom');
+const zoomedImg = document.getElementById('zoomedImage');
+const zoomTitle = document.getElementById('zoomTitle');
+const closeZoom = document.querySelector('.close-zoom');
 
-    // Animazioni al cambio slide
-    swiper.on('slideChange', function() {
-        const bullets = document.querySelectorAll('.swiper-pagination-bullet');
-        bullets.forEach((bullet, index) => {
-            if (index === swiper.activeIndex) {
-                bullet.classList.add('swiper-pagination-bullet-active');
-            } else {
-                bullet.classList.remove('swiper-pagination-bullet-active');
-            }
-        });
+document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', function() {
+        zoomedImg.src = this.querySelector('img').src;
+        zoomTitle.textContent = this.querySelector('.gallery-caption').textContent;
+        zoomContainer.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     });
+});
+
+closeZoom.addEventListener('click', function() {
+    zoomContainer.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+zoomContainer.addEventListener('click', function(e) {
+    if (e.target === zoomContainer) {
+        zoomContainer.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 });
