@@ -85,25 +85,91 @@
             <div class="swiper-slide" data-hash="gallery">
                 <div class="page-content dark-bg">
                     <h1 class="section-title">"I nostri LAVORI"</h1>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">
-                            <img src="images/pluviale.jpg" alt="Pluviali installati">
+                    <div class="mobile-gallery-container">
+                        <!-- Riga 1 -->
+                        <div class="gallery-row">
+                            <div class="gallery-item" data-img="pluviale.jpg" data-caption="Pluviali installati">
+                                <img src="images/pluviale.jpg" alt="Pluviali installati" loading="lazy">
+                                <div class="gallery-caption">Pluviali</div>
+                            </div>
+                            <div class="gallery-item" data-img="camini.jpg" data-caption="Camini realizzati">
+                                <img src="images/camini.jpg" alt="Camini realizzati" loading="lazy">
+                                <div class="gallery-caption">Camini</div>
+                            </div>
                         </div>
-                        <div class="gallery-item">
-                            <img src="images/camini.jpg" alt="Camini realizzati">
+                        
+                        <!-- Riga 2 -->
+                        <div class="gallery-row">
+                            <div class="gallery-item" data-img="pluviale.jpg" data-caption="Pluviali installati">
+                                <img src="images/pluviale.jpg" alt="Pluviali installati" loading="lazy">
+                                <div class="gallery-caption">Pluviali</div>
+                            </div>
+                            <div class="gallery-item" data-img="camini.jpg" data-caption="Camini realizzati">
+                                <img src="images/camini.jpg" alt="Camini realizzati" loading="lazy">
+                                <div class="gallery-caption">Camini</div>
+                            </div>
                         </div>
-                        <div class="gallery-item">
-                            <img src="images/camini 2.jpg" alt="Camini artigianali">
+                        
+                        <!-- Riga 3 -->
+                        <div class="gallery-row">
+                            <div class="gallery-item" data-img="pluviale.jpg" data-caption="Pluviali installati">
+                                <img src="images/pluviale.jpg" alt="Pluviali installati" loading="lazy">
+                                <div class="gallery-caption">Pluviali</div>
+                            </div>
+                            <div class="gallery-item" data-img="camini.jpg" data-caption="Camini realizzati">
+                                <img src="images/camini.jpg" alt="Camini realizzati" loading="lazy">
+                                <div class="gallery-caption">Camini</div>
+                            </div>
                         </div>
-                        <div class="gallery-item">
-                            <img src="images/lucernario.jpg" alt="Lucernari su misura">
+                        
+                        <!-- Riga 4 -->
+                        <div class="gallery-row">
+                            <div class="gallery-item" data-img="pluviale.jpg" data-caption="Pluviali installati">
+                                <img src="images/pluviale.jpg" alt="Pluviali installati" loading="lazy">
+                                <div class="gallery-caption">Pluviali</div>
+                            </div>
+                            <div class="gallery-item" data-img="camini.jpg" data-caption="Camini realizzati">
+                                <img src="images/camini.jpg" alt="Camini realizzati" loading="lazy">
+                                <div class="gallery-caption">Camini</div>
+                            </div>
                         </div>
-                        <div class="gallery-item">
-                            <img src="images/abbaino.webp" alt="Abbaino personalizzato">
+                        
+                        <!-- Riga 5 -->
+                        <div class="gallery-row">
+                            <div class="gallery-item" data-img="pluviale.jpg" data-caption="Pluviali installati">
+                                <img src="images/pluviale.jpg" alt="Pluviali installati" loading="lazy">
+                                <div class="gallery-caption">Pluviali</div>
+                            </div>
+                            <div class="gallery-item" data-img="camini.jpg" data-caption="Camini realizzati">
+                                <img src="images/camini.jpg" alt="Camini realizzati" loading="lazy">
+                                <div class="gallery-caption">Camini</div>
+                            </div>
                         </div>
-                        <div class="gallery-item">
-                            <img src="images/grondaie.jpg" alt="Sistema grondaie">
+                        
+                        <!-- Riga 6 -->
+                        <div class="gallery-row">
+                            <div class="gallery-item" data-img="pluviale.jpg" data-caption="Pluviali installati">
+                                <img src="images/pluviale.jpg" alt="Pluviali installati" loading="lazy">
+                                <div class="gallery-caption">Pluviali</div>
+                            </div>
+                            <div class="gallery-item" data-img="camini.jpg" data-caption="Camini realizzati">
+                                <img src="images/camini.jpg" alt="Camini realizzati" loading="lazy">
+                                <div class="gallery-caption">Camini</div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal (aggiungere alla fine del body) -->
+            <div id="galleryModal" class="gallery-modal">
+                <span class="close-btn" onclick="closeGalleryModal()">&times;</span>
+                <div class="modal-content">
+                    <img id="modalImage" src="" alt="">
+                    <div class="image-caption" id="modalCaption"></div>
+                    <div class="gallery-nav">
+                        <button class="nav-btn prev-btn" onclick="navigateGallery(-1)">❮</button>
+                        <button class="nav-btn next-btn" onclick="navigateGallery(1)">❯</button>
                     </div>
                 </div>
             </div>

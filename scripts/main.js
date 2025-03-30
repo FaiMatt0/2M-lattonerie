@@ -145,3 +145,24 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
         alert('Errore durante l\'invio del messaggio.');
     }
 });
+
+// Gestione hover immagini galleria
+document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+        // Calcola la posizione per evitare che l'immagine esca dallo schermo
+        const rect = this.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        
+        if (rect.right * 1.5 > viewportWidth) {
+            this.style.transformOrigin = 'right center';
+        } else if (rect.left * 1.5 < 0) {
+            this.style.transformOrigin = 'left center';
+        } else {
+            this.style.transformOrigin = 'center center';
+        }
+    });
+    
+    item.addEventListener('mouseleave', function() {
+        this.style.transformOrigin = 'center center';
+    });
+});

@@ -576,46 +576,61 @@ aside li i {
 }
 
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 33%);
-    padding:100px;
-    grid-template-rows: 100px calc(50% - 50px) calc(50% - 50px);
+    padding: 30px 20px 50px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
 }
 
-.gallery h1,
-.gallery h2 {
-    grid-column: 1/span 3;
+.gallery-container {
+    width: 100%;
+    height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.gallery h2 {
-    color: #293133;
-    font-weight: 600;
-    font-size: 1.5rem;
-    padding: 20px 10px;
+.gallery-row {
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    gap: 10px;
 }
 
-.gallery .project {
-    margin: 25px 20px;
-    margin-top: 0px;
-    background: #212529;
-    padding: 5px;
-    border-radius: 20px;
-    cursor: pointer;
-    
+.gallery-item {
+    flex: 1;
+    max-width: 20%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
 }
 
-.gallery .project:hover > img{
-    scale: 1.3;
-    border-radius: 20px;
-}
-
-.gallery .project img {
+.gallery-item img {
     width: 100%;
     height: 100%;
-    border-radius: 20px;
-    object-fit: contain;
-    transition: 0.3s;
-   
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+/* Effetto hover */
+.top-row .gallery-item:hover {
+    transform: scale(1.2);
+    z-index: 10;
+    margin: 0 15px;
+}
+
+.bottom-row .gallery-item:hover {
+    transform: scale(1.2);
+    z-index: 10;
+    margin: 0 15px;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
 }
 
 .contactMe {
@@ -639,6 +654,7 @@ aside li i {
     grid-column: 1/span 3;
     font-size:2.5rem;
     padding:30px;
+    text-align: center;
 }
 
 .contactMe form {
