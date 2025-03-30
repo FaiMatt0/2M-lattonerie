@@ -9,8 +9,8 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
-    background-color: #343a40;
-    color: white;
+    background-color: whitesmoke;
+    color: #293133;
 }
 
 /* Header Stile */
@@ -90,7 +90,7 @@ html, body {
 }
 
 .dark-bg {
-    background-color: #293133;
+    background-color: white;
 }
 
 /* Stili delle pagine (come prima ma adattati) */
@@ -220,11 +220,12 @@ html, body {
 .service-card h2 {
     font-size: 1.2rem;
     margin-bottom: 10px;
+    color: white;
 }
 
 .service-card p {
     font-size: 0.9rem;
-    color: #ddd;
+    color: white;
 }
 
 /* Gallery Grid */
@@ -373,4 +374,132 @@ html, body {
 .contact-item p {
     font-size: 0.9rem;
     color: #ddd;
+}
+
+/* Add to mobile.css */
+.contact-form {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #293133;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form h2 {
+    color: #f39c12;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #343a40;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #f39c12;
+    background-color: #3e444a;
+}
+
+.contact-form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.contact-form button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #f39c12;
+    color: #293133;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-form button[type="submit"]:hover {
+    background-color: #e67e22;
+}
+
+/* Validation styles */
+.contact-form input:required:invalid,
+.contact-form textarea:required:invalid {
+    border-left: 3px solid #e74c3c;
+}
+
+.contact-form input:required:valid,
+.contact-form textarea:required:valid {
+    border-left: 3px solid #2ecc71;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .contact-form {
+        padding: 10px;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .contact-form button[type="submit"] {
+        padding: 12px;
+    }
+}
+
+/* For the contact info items above the form */
+.contact-info {
+    margin-bottom: 25px;
+}
+
+.contact-item {
+    background-color: #293133;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-item i {
+    font-size: 1.8rem;
+    color: #f39c12;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+.contact-item h3 {
+    color: #f39c12;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.contact-item p,
+.contact-item a {
+    color: #ddd;
+    font-size: 0.9rem;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+}
+
+.contact-item a:hover {
+    color: #f39c12;
+    text-decoration: underline;
 }
