@@ -263,7 +263,9 @@ html, body {
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
     transition: bottom 0.4s ease-out;
+    -webkit-transition: bottom 0.4s ease-out; /* Safari compatibility */
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for Safari */
     padding: 25px 15px;
     box-sizing: border-box;
     color: #293133;
@@ -271,6 +273,7 @@ html, body {
 
 .service-box-mobile.active {
     bottom: 0; /* Visible when active */
+    -webkit-bottom: 0; /* Safari compatibility */
 }
 
 .service-box-content {
