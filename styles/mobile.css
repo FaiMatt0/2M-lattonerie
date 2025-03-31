@@ -218,6 +218,7 @@ html, body {
     grid-template-columns: 1fr;
     gap: 20px;
     text-align: center;
+    height: 80vh;
 }
 
 .service-card {
@@ -253,10 +254,10 @@ html, body {
 /* Aggiunta della box arancione */
 .service-box-mobile {
     position: fixed;
-    bottom: -120%; /* Fully hidden when inactive */
+    bottom: -100%;
     left: 0;
     width: 100%;
-    height: calc(80vh - 60px); /* Adjust height to rise less */
+    height: 85vh;
     background-color: #f39c12;
     z-index: 1001;
     border-radius: 20px 20px 0 0;
@@ -269,7 +270,7 @@ html, body {
 }
 
 .service-box-mobile.active {
-    bottom: 60px; /* Stops just below the title */
+    bottom: 0; /* Visible when active */
 }
 
 .service-box-content {
@@ -414,9 +415,6 @@ html, body {
     background-color: #293133;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .contact-form h2 {
@@ -437,7 +435,6 @@ html, body {
     color: white;
     font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
-    max-width: 400px;
 }
 
 .contact-form input:focus,
