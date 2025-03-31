@@ -248,7 +248,7 @@ html, body {
 /* Aggiunta della box arancione */
 .service-box-mobile {
     position: fixed;
-    bottom: -120%;
+    bottom: -200%;
     left: 0;
     width: 100%;
     height: 70vh;
