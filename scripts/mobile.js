@@ -97,29 +97,3 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Simple Image Zoom con titolo
-const zoomContainer = document.getElementById('simpleZoom');
-const zoomedImg = document.getElementById('zoomedImage');
-const zoomTitle = document.getElementById('zoomTitle');
-const closeZoom = document.querySelector('.close-zoom');
-
-document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('click', function() {
-        zoomedImg.src = this.querySelector('img').src;
-        zoomTitle.textContent = this.querySelector('.gallery-caption').textContent;
-        zoomContainer.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    });
-});
-
-closeZoom.addEventListener('click', function() {
-    zoomContainer.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
-
-zoomContainer.addEventListener('click', function(e) {
-    if (e.target === zoomContainer) {
-        zoomContainer.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});

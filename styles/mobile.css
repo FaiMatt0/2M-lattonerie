@@ -82,6 +82,10 @@ html, body {
     -webkit-overflow-scrolling: touch;
 }
 
+.swiper-slide[data-hash="services"] {
+    overflow: hidden;
+}
+
 .page-content {
     min-height: 100%;
     padding: 20px;
@@ -133,6 +137,17 @@ html, body {
     display: block;
 }
 
+.scroll-citation {
+    color: #293133;
+    font-size: 1.2rem;
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
 /* Bottoni */
 .btn {
     display: inline-block;
@@ -157,6 +172,12 @@ html, body {
     font-size: 1.8rem;
     margin-bottom: 30px;
     text-align: center;
+}
+
+.section-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 /* Modal */
@@ -229,7 +250,7 @@ html, body {
     color: #ddd;
 }
 
-/* Aggiunta della box arancione (SOLO QUESTA PARTE È NUOVA) */
+/* Aggiunta della box arancione */
 .service-box-mobile {
     position: fixed;
     bottom: -100%;
@@ -248,7 +269,7 @@ html, body {
 }
 
 .service-box-mobile.active {
-    bottom: 0;
+    bottom: 0; /* Visible when active */
 }
 
 .service-box-content {
@@ -355,113 +376,6 @@ html, body {
     text-align: center;
 }
 
-/* Modal styles */
-/* Aggiungi a mobile.css */
-.gallery-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1002;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.modal-image {
-    max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    touch-action: manipulation;
-}
-
-.close-modal {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1003;
-}
-
-.image-caption {
-    color: white;
-    text-align: center;
-    font-size: 1.1rem;
-    max-width: 90%;
-}
-
-/* Effetto al click */
-.gallery-item:active {
-    transform: scale(0.97);
-    transition: transform 0.2s;
-}
-
-/* Simple Zoom */
-.simple-zoom {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1002;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-#zoomedImage {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
-}
-
-/* Simple Zoom con titolo */
-.zoom-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 15px;
-    text-align: center;
-    z-index: 1;
-}
-
-.zoom-title {
-    color: #f39c12;
-    font-size: 2rem;
-    margin: 0 auto;
-    max-width: 80%;
-}
-
-.close-zoom {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
-}
-
-#zoomedImage {
-    margin-top: 50px; /* Spazio per il titolo */
-    max-width: 100%;
-    max-height: calc(90vh - 50px);
-    object-fit: contain;
-}
-
 /* Contact Info */
 .contact-info {
     display: grid;
@@ -500,6 +414,9 @@ html, body {
     background-color: #293133;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .contact-form h2 {
@@ -520,6 +437,7 @@ html, body {
     color: white;
     font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
+    max-width: 400px;
 }
 
 .contact-form input:focus,
