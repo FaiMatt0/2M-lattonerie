@@ -253,10 +253,10 @@ html, body {
 /* Aggiunta della box arancione */
 .service-box-mobile {
     position: fixed;
-    bottom: -100%; /* Fully hidden when inactive */
+    bottom: -120%; /* Fully hidden when inactive */
     left: 0;
     width: 100%;
-    height: calc(100vh - 60px); /* Leaves space for the title */
+    height: calc(80vh - 60px); /* Adjust height to rise less */
     background-color: #f39c12;
     z-index: 1001;
     border-radius: 20px 20px 0 0;
