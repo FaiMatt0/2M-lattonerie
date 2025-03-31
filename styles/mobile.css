@@ -330,6 +330,12 @@ html, body {
     transform: scale(0.98);
 }
 
+.services-citation {
+    color: #f39c12;
+    font-size: 1.4rem;
+    margin-top: 2%;
+}
+
 /* Gallery Grid */
 .mobile-gallery-container {
     padding: 10px;
