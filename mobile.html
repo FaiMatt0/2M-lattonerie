@@ -215,64 +215,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Cookie Consent Banner -->
-    <div id="cookieConsentBanner" class="cookie-banner">
-        <p>Questo sito utilizza i cookie per migliorare l'esperienza dell'utente. Continuando a navigare, accetti l'uso dei cookie. <a href="cookie-policy.html">Leggi di più</a></p>
-        <button id="acceptCookies" class="btn">Accetta</button>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const banner = document.getElementById("cookieConsentBanner");
-            const acceptButton = document.getElementById("acceptCookies");
-
-            // Check if cookies have already been accepted
-            if (!localStorage.getItem("cookiesAccepted")) {
-                banner.style.display = "block";
-            }
-
-            // Handle cookie acceptance
-            acceptButton.addEventListener("click", function () {
-                localStorage.setItem("cookiesAccepted", "true");
-                banner.style.display = "none";
-            });
-        });
-    </script>
-
-    <style>
-        .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            z-index: 1000;
-            display: none;
-        }
-
-        .cookie-banner a {
-            color: #ffd700;
-            text-decoration: underline;
-        }
-
-        .cookie-banner .btn {
-            background-color: #ffd700;
-            color: #000;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        .cookie-banner .btn:hover {
-            background-color: #e6c200;
-        }
-    </style>
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="scripts/mobile.js"></script>
 </body>
