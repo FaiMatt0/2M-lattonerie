@@ -211,10 +211,8 @@ html, body {
 /* Stili esistenti dei servizi (NON MODIFICATI) */
 .services-grid {
     display: grid;
-    grid-template-columns: 1fr;
     gap: 20px;
     text-align: center;
-    height: 80vh;
 }
 
 .service-card {
