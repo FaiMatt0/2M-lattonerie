@@ -168,17 +168,23 @@ document.querySelectorAll('.gallery-item').forEach(item => {
 });
 
 function acceptCookies() {
-    document.querySelector('.cookies-consent').style.display = 'none';
+    const banner = document.querySelector('.cookies-consent');
+    banner.style.animation = 'fadeOut 0.5s ease-in-out';
+    setTimeout(() => banner.style.display = 'none', 500);
     localStorage.setItem('cookiesAccepted', 'true');
 }
 
 function rejectCookies() {
-    document.querySelector('.cookies-consent').style.display = 'none';
+    const banner = document.querySelector('.cookies-consent');
+    banner.style.animation = 'fadeOut 0.5s ease-in-out';
+    setTimeout(() => banner.style.display = 'none', 500);
     localStorage.setItem('cookiesAccepted', 'false');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('cookiesAccepted')) {
-        document.querySelector('.cookies-consent').style.display = 'flex';
+        const banner = document.querySelector('.cookies-consent');
+        banner.style.display = 'flex';
+        banner.style.animation = 'fadeIn 0.5s ease-in-out';
     }
 });

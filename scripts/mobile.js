@@ -100,3 +100,8 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+document.querySelector('.service-box-overlay').addEventListener('transitionend', function () {
+    if (this.classList.contains('active')) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});

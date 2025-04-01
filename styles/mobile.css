@@ -321,7 +321,7 @@ html, body {
 }
 
 .service-box-overlay.active {
-    display: block;
+    scroll-behavior: smooth;
 }
 
 /* Effetto di press sulle card */

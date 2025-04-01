@@ -1,0 +1,47 @@
+.privacy-container {
+    margin-left: 240px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #293133;
+    line-height: 1.8;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.privacy-content {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.privacy-content h1 {
+    color: #e67e22;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.privacy-content h2 {
+    color: #e67e22;
+    font-size: 1.8rem;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.privacy-content p {
+    font-size: 1.1rem;
+    width: 100%;
+    text-align: center;
+    color: #293133;
+}
+
+aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+}
