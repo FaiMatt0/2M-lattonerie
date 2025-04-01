@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Inizializzazione Swiper
     const swiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
         slidesPerView: 1,
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     });
 
-    // Dati dei servizi
     const servicesData = [
         {
             title: "Coperture civili e industriali",
@@ -39,21 +37,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     ];
 
-    // Funzioni del service box
     function openService(index) {
         const box = document.getElementById('serviceBoxMobile');
         const overlay = document.createElement('div');
         overlay.className = 'service-box-overlay active';
         document.body.appendChild(overlay);
 
-        // Disabilita lo swiper quando il service box è aperto
-        swiper.disable();
+        // Only scroll to top if we're on the services slide (slide 3)
+        if (swiper.activeIndex === 2) { // 0-based index (0=home, 1=about, 2=services)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         document.getElementById('serviceBoxTitle').textContent = servicesData[index].title;
         document.getElementById('serviceBoxContent').innerHTML = servicesData[index].content;
         box.classList.add('active');
         document.body.classList.add('service-box-open');
+        swiper.disable();
 
         overlay.addEventListener('click', closeServiceBox);
     }
@@ -64,8 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         box.classList.remove('active');
         document.body.classList.remove('service-box-open');
-        
-        // Riabilita lo swiper
         swiper.enable();
         
         if (overlay) {
@@ -75,19 +72,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Chiudi con tasto ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && document.getElementById('serviceBoxMobile').classList.contains('active')) {
             closeServiceBox();
         }
     });
 
-    // Esponi le funzioni globalmente se necessario
     window.openService = openService;
     window.closeServiceBox = closeServiceBox;
 });
 
-// CSS aggiuntivo necessario
+// Add overlay styles
 const style = document.createElement('style');
 style.textContent = `
     .service-box-overlay {
