@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Swiper
     const swiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
         slidesPerView: 1,
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     });
 
+    // Service data
     const servicesData = [
         {
             title: "Coperture civili e industriali",
@@ -37,51 +39,51 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     ];
 
+    // Open service box
     function openService(index) {
-        const box = document.getElementById('serviceBoxMobile');
-        const overlay = document.createElement('div');
-        overlay.className = 'service-box-overlay active';
-        document.body.appendChild(overlay);
-
-        // Only scroll to top if we're on the services slide (slide 3)
-        if (swiper.activeIndex === 2) { // 0-based index (0=home, 1=about, 2=services)
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
+        const serviceBox = document.getElementById('serviceBox');
         document.getElementById('serviceBoxTitle').textContent = servicesData[index].title;
         document.getElementById('serviceBoxContent').innerHTML = servicesData[index].content;
-        box.classList.add('active');
-        document.body.classList.add('service-box-open');
-        swiper.disable();
-
-        overlay.addEventListener('click', closeServiceBox);
+        
+        // Disable body scroll but keep Swiper active
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        
+        // Show service box
+        serviceBox.classList.add('active');
+        
+        // Temporarily disable touch events on Swiper
+        swiper.allowTouchMove = false;
     }
 
+    // Close service box
     function closeServiceBox() {
-        const box = document.getElementById('serviceBoxMobile');
-        const overlay = document.querySelector('.service-box-overlay');
+        const serviceBox = document.getElementById('serviceBox');
         
-        box.classList.remove('active');
-        document.body.classList.remove('service-box-open');
-        swiper.enable();
+        // Re-enable body scroll
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
         
-        if (overlay) {
-            setTimeout(() => {
-                overlay.remove();
-            }, 400);
-        }
+        // Hide service box
+        serviceBox.classList.remove('active');
+        
+        // Re-enable Swiper touch events
+        swiper.allowTouchMove = true;
     }
 
+    // Close when pressing ESC
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && document.getElementById('serviceBoxMobile').classList.contains('active')) {
+        if (e.key === 'Escape' && document.getElementById('serviceBox').classList.contains('active')) {
             closeServiceBox();
         }
     });
 
+    // Make functions available globally
     window.openService = openService;
     window.closeServiceBox = closeServiceBox;
 });
-
 // Add overlay styles
 const style = document.createElement('style');
 style.textContent = `
