@@ -105,4 +105,5 @@ style.textContent = `
         width: 100%;
     }
 `;
+
 document.head.appendChild(style);
