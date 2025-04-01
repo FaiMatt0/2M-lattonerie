@@ -219,12 +219,13 @@
     <!-- Cookie Consent Banner -->
     <div id="cookieConsent" class="cookie-consent">
         <div class="cookie-content">
-            <p>We use cookies to ensure you get the best experience on our website. <a href="#privacy">Learn more</a></p>
+            <p>Utilizziamo i cookie per garantire la migliore esperienza sul nostro sito. <a href="#privacy">Scopri di più</a></p>
             <div class="cookie-buttons">
-                <button id="acceptCookies" class="cookie-btn accept">Accept</button>
-                <button id="declineCookies" class="cookie-btn decline">Decline</button>
+                <button class="accept-cookies-btn" onclick="acceptCookies()">Accetta</button>
+                <button class="reject-cookies-btn" onclick="rejectCookies()">Rifiuta</button>
             </div>
         </div>
     </div>
+    <script src="scripts/cookies.js"></script>
 </body>
 </html>
