@@ -166,3 +166,19 @@ document.querySelectorAll('.gallery-item').forEach(item => {
         this.style.transformOrigin = 'center center';
     });
 });
+
+function acceptCookies() {
+    document.querySelector('.cookies-consent').style.display = 'none';
+    localStorage.setItem('cookiesAccepted', 'true');
+}
+
+function rejectCookies() {
+    document.querySelector('.cookies-consent').style.display = 'none';
+    localStorage.setItem('cookiesAccepted', 'false');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (!localStorage.getItem('cookiesAccepted')) {
+        document.querySelector('.cookies-consent').style.display = 'flex';
+    }
+});
