@@ -63,16 +63,14 @@ function openService(index) {
     overlay.className = 'service-box-overlay active';
     document.body.appendChild(overlay);
 
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     document.getElementById('serviceBoxTitle').textContent = servicesData[index].title;
     document.getElementById('serviceBoxContent').innerHTML = servicesData[index].content;
 
     box.classList.add('active');
     document.body.style.overflow = 'hidden';
-
-    // Scroll to the top of the page after the service box is visible
-    setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
 
     // Chiudi cliccando sull'overlay
     overlay.addEventListener('click', closeServiceBox);
@@ -99,11 +97,5 @@ document.addEventListener('backbutton', closeServiceBox, false);
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && document.getElementById('serviceBoxMobile').classList.contains('active')) {
         closeServiceBox();
-    }
-});
-
-document.querySelector('.service-box-overlay').addEventListener('transitionend', function () {
-    if (this.classList.contains('active')) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 });
