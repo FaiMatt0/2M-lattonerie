@@ -62,13 +62,16 @@ function openService(index) {
     const overlay = document.createElement('div');
     overlay.className = 'service-box-overlay active';
     document.body.appendChild(overlay);
-    
+
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     document.getElementById('serviceBoxTitle').textContent = servicesData[index].title;
     document.getElementById('serviceBoxContent').innerHTML = servicesData[index].content;
-    
+
     box.classList.add('active');
     document.body.style.overflow = 'hidden';
-    
+
     // Chiudi cliccando sull'overlay
     overlay.addEventListener('click', closeServiceBox);
 }
