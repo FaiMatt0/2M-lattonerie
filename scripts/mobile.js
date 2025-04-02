@@ -45,10 +45,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('serviceBoxTitle').textContent = servicesData[index].title;
         document.getElementById('serviceBoxContent').innerHTML = servicesData[index].content;
         
-        // Disable body scroll but keep Swiper active
-        document.body.style.overflow = 'hidden';
+        // Store current scroll position before fixing the body
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Apply fixed positioning with the correct top offset to maintain visual position
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.overflow = 'hidden';
         
         // Show service box
         serviceBox.classList.add('active');
@@ -61,10 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeServiceBox() {
         const serviceBox = document.getElementById('serviceBox');
         
+        // Get the body's top position (without the 'px' suffix)
+        const scrollPosition = parseInt(document.body.style.top || '0') * -1;
+        
         // Re-enable body scroll
-        document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.width = '';
+        document.body.style.top = '';
+        document.body.style.overflow = '';
+        
+        // Restore the scroll position
+        window.scrollTo(0, scrollPosition);
         
         // Hide service box
         serviceBox.classList.remove('active');
@@ -83,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Make functions available globally
     window.openService = openService;
     window.closeServiceBox = closeServiceBox;
-});
+}); 
 // Add overlay styles
 const style = document.createElement('style');
 style.textContent = `

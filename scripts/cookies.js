@@ -1,21 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const banner = document.querySelector('.cookie-consent');
-    const acceptButton = document.querySelector('.accept-cookies-btn');
-    const rejectButton = document.querySelector('.reject-cookies-btn');
-
-    if (localStorage.getItem('cookiesAccepted') === 'true') {
-        banner.style.display = 'none';
+document.addEventListener('DOMContentLoaded', function() {
+    const cookieConsent = document.getElementById('cookieConsent');
+    const acceptBtn = document.getElementById('acceptBtn');
+    const rejectBtn = document.getElementById('rejectBtn');
+    
+    // Check if consent has already been given
+    if (localStorage.getItem('cookieConsent') !== null) {
+        // Instead of changing display style, add a class
+        cookieConsent.classList.add('hidden');
     }
-
-    acceptButton.addEventListener('click', () => {
-        banner.style.animation = 'fadeOut 0.5s ease-in-out';
-        setTimeout(() => banner.style.display = 'none', 500);
-        localStorage.setItem('cookiesAccepted', 'true');
+    
+    // Handle accept button click
+    acceptBtn.addEventListener('click', function() {
+        localStorage.setItem('cookieConsent', 'accepted');
+        cookieConsent.classList.add('hidden');
     });
-
-    rejectButton.addEventListener('click', () => {
-        banner.style.animation = 'fadeOut 0.5s ease-in-out';
-        setTimeout(() => banner.style.display = 'none', 500);
-        localStorage.setItem('cookiesAccepted', 'false');
+    
+    // Handle reject button click
+    rejectBtn.addEventListener('click', function() {
+        localStorage.setItem('cookieConsent', 'rejected');
+        cookieConsent.classList.add('hidden');
     });
 });

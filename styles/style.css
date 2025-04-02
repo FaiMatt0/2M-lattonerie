@@ -858,6 +858,10 @@ form h2 .SocialLinks i:hover{
     transform: scale(1.05);
 }
 
+.hidden {
+    display: none !important;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

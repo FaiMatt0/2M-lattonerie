@@ -173,7 +173,7 @@ html, body {
 .section-buttons {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-top: 5%;
 }
 
 /* Modal */
@@ -552,7 +552,7 @@ html, body {
 }
 
 /* Cookie Consent Banner */
-.cookie-consent {
+.cookies-consent {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -571,44 +571,32 @@ html, body {
     animation: fadeIn 0.5s ease-in-out;
 }
 
-.cookie-consent p {
+.cookies-consent p {
     margin: 0;
     font-size: 1rem;
     line-height: 1.5;
 }
 
-.cookie-consent a {
+.cookies-consent .privacy-link {
     color: #f39c12;
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 
-.cookie-consent a:hover {
+.cookies-consent .privacy-link:hover {
     color: #d88b0e;
     text-decoration: underline;
 }
 
-.cookie-buttons {
+.cookies-buttons {
     display: flex;
     gap: 10px;
     width: 100%;
     justify-content: flex-start;
 }
 
-.accept-cookies-btn {
-    background-color: #f39c12;
-    color: #293133;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 2%;
-}
-
+.accept-cookies-btn,
 .reject-cookies-btn {
     background-color: #f39c12;
     color: #293133;
@@ -619,12 +607,16 @@ html, body {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 2%;
 }
 
-.cookie-btn:hover {
+.accept-cookies-btn:hover,
+.reject-cookies-btn:hover {
     background-color: #d88b0e;
     transform: scale(1.05);
+}
+
+.hidden {
+    display: none !important;
 }
 
 @keyframes fadeIn {
