@@ -57,35 +57,52 @@ const serviceContents = [
 
 function OpenService(index) {
     const serviceBox = document.querySelector('.service-box');
-    const overlay = document.createElement('div');
-    overlay.className = 'service-box-overlay';
-    document.body.appendChild(overlay);
+    const serviceBoxContent = document.querySelector('.service-box-content');
     
-    // Imposta il contenuto
-    serviceBox.innerHTML = `
-        <h3>${serviceContents[index].title}</h3>
-        <p>${serviceContents[index].description}</p>
-        <div class="close-btn" onclick="CloseService()">×</div>
+    // Contenuti dei servizi
+    const serviceContents = [
+        {
+            title: 'Coperture civili e industriali',
+            description: 'Realizziamo coperture per edifici civili e industriali utilizzando materiali di alta qualità che garantiscono durata e resistenza agli agenti atmosferici. I nostri interventi includono sia nuove installazioni che ristrutturazioni, con soluzioni personalizzate in base alle vostre esigenze specifiche. Lavoriamo con diversi materiali come rame, zinco-titanio, alluminio e acciaio inox, per garantire il miglior risultato estetico e funzionale.',
+            image1: 'images/20180712_154302.jpg',
+            image2: 'images/IMG_20221103_170101.jpg'
+        },
+        {
+            title: 'Lucernari e abbaini',
+            description: 'Progettiamo e installiamo lucernari e abbaini di alta qualità, perfetti per illuminare naturalmente i vostri spazi interni. Le nostre soluzioni sono studiate per garantire un\'ottima illuminazione, ventilazione e un aspetto estetico in armonia con l\'architettura dell\'edificio. Utilizziamo materiali resistenti e sistemi di impermeabilizzazione avanzati per prevenire infiltrazioni e garantire la massima efficienza energetica.',
+            image1: 'images/20180319_173414.jpg',
+            image2: 'images/20180321_133741.jpg'
+        },
+        {
+            title: 'Pluviali e grondaie',
+            description: 'Installiamo sistemi di raccolta e smaltimento delle acque piovane efficienti e duraturi. I nostri pluviali e grondaie sono realizzati con materiali di alta qualità come rame, acciaio zincato, alluminio preverniciato e acciaio inox, garantendo resistenza alla corrosione e lunga durata nel tempo. Ogni installazione è progettata su misura per adattarsi perfettamente all\'estetica e alle necessità funzionali del vostro edificio.',
+            image1: 'images/20140411_164727.jpg',
+            image2: 'images/IMG_20230406_172747.jpg'
+        }
+    ];
+    
+    // Aggiorna il contenuto della service box
+    const selectedService = serviceContents[index];
+    serviceBoxContent.innerHTML = `
+        <h3>${selectedService.title}</h3>
+        <p>${selectedService.description}</p>
+        <div class="close-btn" onclick="CloseService()">&times;</div>
     `;
     
-    // Mostra box e overlay
-    serviceBox.classList.add('active');
-    overlay.classList.add('active');
+    // Aggiorna le immagini
+    const imageElements = document.querySelectorAll('.service-image');
+    imageElements[0].src = selectedService.image1;
+    imageElements[1].src = selectedService.image2;
     
-    // Chiudi cliccando sull'overlay
-    overlay.addEventListener('click', CloseService);
+    // Mostra la service box
+    serviceBox.classList.add('active');
 }
 
 function CloseService() {
     const serviceBox = document.querySelector('.service-box');
-    const overlay = document.querySelector('.service-box-overlay');
-    
-    if (serviceBox) serviceBox.classList.remove('active');
-    if (overlay) {
-        overlay.classList.remove('active');
-        setTimeout(() => overlay.remove(), 300); // Aspetta la transizione
-    }
+    serviceBox.classList.remove('active');
 }
+
 
 // Chiudi premendo ESC
 document.addEventListener('keydown', (e) => {
