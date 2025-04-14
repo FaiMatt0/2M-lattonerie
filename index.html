@@ -3,16 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
         <title>2M Lattonerie SRLS</title>
         <link rel="icon" href="images/minilogonobg.png" type="image/png">
     </head>
     <body>
         <main>
             <aside>
-                <div class="aside-logo">
+                <div class="aside-logo animate__animated animate__zoomInDown">
                     <img src="images/minilogonobg.png" alt="2M Lattonerie Logo">
                 </div>
                 <ul class="Links">
@@ -36,7 +37,7 @@
             <div class="swiper mySwiper">
                 <div class="SlideContainer swiper-wrapper">
                     <div class="swiper-slide home-slide">
-                        <div class="HomeContent">
+                        <div class="HomeContent animate__animated animate__backInLeft">
                             <h1>"Da anni al vostro fianco, con <span class="stylized-name">PRECISIONE E QUALITÀ</span>,</h1>
                             <h2>per lavorazioni che <span class="proffesions">SFIDANO IL TEMPO"</span></h2>
                             <div class="buttonGroup">
@@ -44,12 +45,12 @@
                                 <button class="contattaci-btn" onclick="Navigate(4)">Contattaci</button>
                             </div>
                         </div>
-                        <div class="SideImg">
+                        <div class="SideImg ">
                             <div class="top-right-corner">
                                 <hr class="hr1">
                                 <hr class="hr2">
                             </div>
-                            <img src="./images/logo lattonerie.jpg" alt="Logo Lattonerie" style="max-width: 100%; height: auto;">
+                            <img src="./images/logo lattonerie.jpg" alt="Logo Lattonerie" style="max-width: 100%; height: auto;" class="animate__animated animate__flipInY">
                             <div class="bottom-left-corner">
                                 <hr class="hr1">
                                 <hr class="hr2">
@@ -120,17 +121,17 @@
                         <div class="services">
                             <h1 class="heading">"I nostri servizi"</h1>
                             <div class="service" onclick="OpenService(0)">
-                                <div class="service-icon"><i class="fa-solid fa-house-chimney"></i></div>
+                                <div class="service-icon"><img src="images/casa animata.gif" alt="Animated House" class="animated-icon"></div>
                                 <h2>Coperture civili e industriali</h2>
                                 <p>Offriamo soluzioni su misura per aziende e privati, trasformando ogni idea in realtà</p>
                             </div>
                             <div class="service" onclick="OpenService(1)">
-                                <div class="service-icon"><i class="fa-solid fa-border-all"></i></div>
+                                <div class="service-icon"><img src="images/finestra animata.gif" alt="Animated Window" class="animated-icon"></div>
                                 <h2>Lucernari e abbaini</h2>
                                 <p>Illumina i tuoi spazi con soluzioni innovative e funzionali</p>
                             </div>
                             <div class="service" onclick="OpenService(2)">
-                                <div class="service-icon"><i class="fa-solid fa-water"></i></div>
+                                <div class="service-icon"><img src="images/acqua animata.gif" alt="Animated Water" class="animated-icon"></div>
                                 <h2>Pluviali e grondaie</h2>
                                 <p>Offriamo soluzioni personalizzate per la raccolta e lo smaltimento delle acque piovane, garantendo efficienza e durata nel tempo.</p>
                             </div>
@@ -194,27 +195,27 @@
 
                     <div class="swiper-slide contactMe">
                         <h1 class="heading">Contatti</h1>
-                        <div class="contactinfo"><i class="fa-solid fa-mobile"></i>
+                        <div class="contactinfo"><img src="images/telefono animata.gif" alt="Telefono" class="animated-icon">
                             <h3>Telefono</h3>
                             <p>+39 348 0820434</p>
                         </div>
-                        <div class="contactinfo"><i class="fa-solid fa-location-dot"></i>
+                        <div class="contactinfo"><img src="images/indirizzo animata.gif" alt="Location" class="animated-icon">
                             <h3>Dove siamo</h3>
                             <p>Via Cesena Rivatte 20/B Azzano Decimo (PN) 33082</p>
                         </div>
-                        <div class="contactinfo"><i class="fa-regular fa-envelope"></i>
+                        <div class="contactinfo"><img src="images/mail animata.gif" alt="Email" class="animated-icon">
                             <h3>Email</h3>
                             <p>2emme.lattonerie@gmail.com</p>
                         </div>
-                        <div class="contactinfo"><i class="fa-solid fa-id-card"></i>
+                        <div class="contactinfo"><img src="images/partita iva animata.gif" alt="Partita IVA" class="animated-icon">
                             <h3>Partita Iva</h3>
                             <p>01920980933</p>
                         </div>
                         <form>
                             <h2>Invia un messaggio <div class="SocialLinks">
-                                    <a href="pages/workinprogress.html"><i class="fa-brands fa-linkedin"></i></a>
-                                    <a href="pages/workinprogress.html"><i class="fa-brands fa-instagram"></i></a>
-                                    <a href="pages/workinprogress.html"><i class="fa-brands fa-facebook"></i></a>
+                                    <a href="pages/workinprogress.html"><img src="images/linkedin animata.gif" alt="LinkedIn" class="social-gif"></a>
+                                    <a href="pages/workinprogress.html"><img src="images/instagram animata.gif" alt="Instagram" class="social-gif"></a>
+                                    <a href="pages/workinprogress.html"><img src="images/facebook animata.gif" alt="Facebook" class="social-gif"></a>
                                 </div>
                             </h2>
                             <input type="text" placeholder="Il tuo nome" required>

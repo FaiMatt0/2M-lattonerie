@@ -516,6 +516,28 @@ aside li i {
     color: white;
 }
 
+/* Styling for animated GIFs in service containers */
+.service img, 
+.service video,
+.service .gif-container {
+    max-width: 80%;  /* Reduced from 100% to 80% */
+    height: auto;
+    margin: 10px auto;
+    border-radius: 5px;
+    object-fit: contain;
+    max-height: 120px; /* Reduced from 150px to 120px (20% smaller) */
+}
+
+/* Ensure GIFs maintain aspect ratio */
+.service .gif-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 64%;  /* Reduced from 80% to 64% (80% of 80%) */
+    margin: 0 auto;
+}
+
 .service h2{
     color:#f39c12;
     margin-bottom: 1rem;
@@ -589,11 +611,48 @@ aside li i {
     padding-right: 30px;
 }
 
-.service-box-content p {
+/* Specific styling for contact GIFs */
+.contactinfo img,
+.contactinfo .contact-gif {
+    max-width: 32px;
+    height: auto;
+    margin: 5px auto;
+    border-radius: 4px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.contactinfo img:hover,
+.contactinfo .contact-gif:hover {
+    transform: scale(1.15);
+}
+
+/* Specific styling for contact animated icons */
+.contactinfo .animated-icon {
+    max-width: 40px; /* Increased size (was ~32px before) */
+    height: auto;
+    margin: 8px auto;
+    border-radius: 4px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.contactinfo .animated-icon:hover {
+    transform: scale(1.15);
+}
+
+/* Ensure contact area has proper spacing for the larger icons */
+.contactinfo {
+    display: flex;
+    flex-direction: column;
     color: #293133;
-    margin: 15px 30px;
-    line-height: 1.6;
-    max-width: 100%; /* Assicura che il testo resti nella sua area */
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 2.5rem; /* Slightly increased spacing */
+    margin-left: 30%;
 }
 
 .service-box-images {
@@ -768,6 +827,25 @@ aside li i {
     font-size: 2rem;
     color: #f39c12;
     padding-bottom: 0.6rem;
+}
+
+/* Styling for social media animated GIFs */
+.social-gif,
+.SocialLinks img,
+form h2 .SocialLinks img {
+    max-width: 24px;
+    height: auto;
+    margin: 0 5px;
+    border-radius: 3px;
+    object-fit: contain;
+    vertical-align: middle;
+    transition: transform 0.3s ease;
+}
+
+.social-gif:hover,
+.SocialLinks img:hover,
+form h2 .SocialLinks img:hover {
+    transform: scale(1.2);
 }
 
 .contactinfo h3 {

@@ -378,3 +378,293 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+// Add burger menu styles and functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Add hamburger menu specific styles
+  const menuStyles = document.createElement('style');
+  menuStyles.textContent = `
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    *:focus {
+      outline: none;
+    }
+
+    #menu-btn-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 39px;
+      z-index: 1002;
+      transform: scale(0.8);
+    }
+
+    #menu-btn {
+      width: 39px;
+      overflow: hidden;
+    }
+
+    #menu-checkbox {
+      display: none;
+    }
+
+    #menu-label {
+      position: relative;
+      display: block;
+      height: 29px;
+      cursor: pointer;
+    }
+
+    #menu-label:before,
+    #menu-label:after,
+    #menu-bar {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background-color: #fff;
+      border-radius: 2px;
+    }
+
+    #menu-label:before,
+    #menu-label:after {
+      content: "";
+      transition: 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) left;
+    }
+
+    #menu-label:before {
+      top: 0;
+    }
+
+    #menu-label:after {
+      top: 12px;
+    }
+
+    #menu-bar {
+      top: 24px;
+    }
+
+    #menu-bar:before {
+      content: "MENU";
+      position: absolute;
+      top: 5px;
+      right: 0;
+      left: 0;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      font-family: "Montserrat", Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+
+    #menu-checkbox:checked + #menu-label:before {
+      left: -39px;
+    }
+
+    #menu-checkbox:checked + #menu-label:after {
+      left: 39px;
+    }
+
+    #menu-checkbox:checked + #menu-label #menu-bar:before {
+      animation: moveUpThenDown 0.8s ease 0.2s forwards,
+        shakeWhileMovingUp 0.8s ease 0.2s forwards,
+        shakeWhileMovingDown 0.2s ease 0.8s forwards;
+    }
+
+    @keyframes moveUpThenDown {
+      0% {
+        top: 0;
+      }
+      50% {
+        top: -27px;
+      }
+      100% {
+        top: -14px;
+      }
+    }
+
+    @keyframes shakeWhileMovingUp {
+      0% {
+        transform: rotateZ(0);
+      }
+      25% {
+        transform: rotateZ(-10deg);
+      }
+      50% {
+        transform: rotateZ(0deg);
+      }
+      75% {
+        transform: rotateZ(10deg);
+      }
+      100% {
+        transform: rotateZ(0);
+      }
+    }
+
+    @keyframes shakeWhileMovingDown {
+      0% {
+        transform: rotateZ(0);
+      }
+      80% {
+        transform: rotateZ(3deg);
+      }
+      90% {
+        transform: rotateZ(-3deg);
+      }
+      100% {
+        transform: rotateZ(0);
+      }
+    }
+
+    /* Mobile Menu Styles - Starting from header bottom */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .mobile-menu.active {
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .menu-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(3px);
+    }
+
+    .mobile-menu.active .menu-backdrop {
+      opacity: 1;
+    }
+
+    /* Start menu from header bottom */
+    .menu-content {
+      position: absolute;
+      top: 60px; /* Header height */
+      right: -300px;
+      width: 300px;
+      height: calc(100% - 60px);
+      background-color: #111;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0;
+      overflow-y: auto;
+    }
+
+    .mobile-menu.active .menu-content {
+      right: 0;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-menu ul li {
+      margin: 0;
+      transform: translateX(50px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .mobile-menu.active ul li {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .mobile-menu.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    .mobile-menu.active ul li:nth-child(2) { transition-delay: 0.2s; }
+    .mobile-menu.active ul li:nth-child(3) { transition-delay: 0.3s; }
+    .mobile-menu.active ul li:nth-child(4) { transition-delay: 0.4s; }
+    .mobile-menu.active ul li:nth-child(5) { transition-delay: 0.5s; }
+
+    .mobile-menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 600;
+      display: block;
+      padding: 16px 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .mobile-menu ul li a:hover,
+    .mobile-menu ul li a:focus {
+      background-color: rgba(255, 107, 0, 0.1);
+      color: #FF6B00;
+      border-left: 4px solid #FF6B00;
+    }
+
+    /* Ensure header is above menu */
+    .swiper-header {
+      z-index: 1001;
+      position: relative;
+    }
+
+    /* Prevent scrolling when menu is open */
+    body.menu-open {
+      overflow: hidden;
+    }
+  `;
+  document.head.appendChild(menuStyles);
+
+  // Add functionality for the burger menu
+  const menuCheckbox = document.getElementById('menu-checkbox');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const menuBackdrop = document.querySelector('.menu-backdrop');
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  if (menuCheckbox) {
+    menuCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        mobileMenu.classList.add('active');
+        document.body.classList.add('menu-open');
+      } else {
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+    });
+  }
+  
+  // Close menu when backdrop is clicked
+  if (menuBackdrop) {
+    menuBackdrop.addEventListener('click', function() {
+      menuCheckbox.checked = false;
+      mobileMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  }
+  
+  // Close menu when navigation links are clicked
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      menuCheckbox.checked = false;
+      mobileMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  });
+  
+  // Close menu on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+      menuCheckbox.checked = false;
+      mobileMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    }
+  });
+});
