@@ -28,6 +28,29 @@ aside {
     backdrop-filter: blur(20px);
 }
 
+
+/* Add these styles to your style.css file */
+
+.aside-logo {
+    width: 100%;
+    padding: 25px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.aside-logo img {
+    width: 70%;
+    max-width: 150px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.aside-logo img:hover {
+    transform: scale(1.1);
+}
+
 .Links {
     display: flex;
     flex-direction: column;

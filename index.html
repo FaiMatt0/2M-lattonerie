@@ -12,6 +12,9 @@
     <body>
         <main>
             <aside>
+                <div class="aside-logo">
+                    <img src="images/minilogonobg.png" alt="2M Lattonerie Logo">
+                </div>
                 <ul class="Links">
                     <li onclick="Navigate(0)" class="activeLink"><i class="fa-solid fa-house"></i>
                         <p>Home</p>
@@ -214,10 +217,10 @@
                                     <a href="pages/workinprogress.html"><i class="fa-brands fa-facebook"></i></a>
                                 </div>
                             </h2>
-                            <input type="text" placeholder="Nome">
-                            <input type="text" placeholder="email">
-                            <textarea rows="10" placeholder="Scrivi il tuo messagio..."></textarea>
-                            <button class="primary">Invia</button>
+                            <input type="text" placeholder="Nome" required>
+                            <input type="email" placeholder="Email" required>
+                            <textarea rows="10" placeholder="Scrivi il tuo messaggio..." required></textarea>
+                            <button type="submit" class="primary">Invia</button>
                         </form>
                         <footer>
                             <li>Copyright © 2025 2M Lattonerie srls di Yvan Mascarin P. Iva: 01920980933</li>
@@ -235,6 +238,7 @@
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
         <script src="scripts/main.js"></script>
+        <script src="backend/contact-form.js"></script>
         <script src="scripts/cookies.js"></script>
     </body>
 </html>

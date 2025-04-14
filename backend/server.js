@@ -7,213 +7,140 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+// Middleware - more permissive for testing
 app.use(cors({
-origin: ['http://localhost:5000', 'https://2mlattonerie.it'], // Adjust with your actual domains
-methods: ['POST'],
-allowedHeaders: ['Content-Type']
+  origin: '*', // Allow all origins during testing
+  methods: ['POST', 'GET', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Parse JSON bodies
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Simple rate limiting middleware
-const requestCounts = {};
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
-const MAX_REQUESTS_PER_IP = 5;
+// Serve static files if needed
+app.use(express.static('public'));
 
-const rateLimiter = (req, res, next) => {
-const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+// Debug endpoint to verify form data
+app.post('/debug-form', (req, res) => {
+  console.log('DEBUG FORM DATA:');
+  console.log(JSON.stringify(req.body, null, 2));
+  
+  res.status(200).json({
+    message: 'Form data received successfully',
+    data: req.body
+  });
+});
 
-// Initialize or update counts
-if (!requestCounts[ip]) {
-    requestCounts[ip] = {
-    count: 1,
-    resetTime: Date.now() + RATE_LIMIT_WINDOW
-    };
-} else {
-    // Reset if window has passed
-    if (Date.now() > requestCounts[ip].resetTime) {
-    requestCounts[ip] = {
-        count: 1,
-        resetTime: Date.now() + RATE_LIMIT_WINDOW
-    };
-    } else {
-    requestCounts[ip].count++;
+// Simple endpoint for the contact form (no rate limiting for testing)
+app.post('/send-email', async (req, res) => {
+  console.log('FORM SUBMISSION RECEIVED:');
+  console.log(JSON.stringify(req.body, null, 2));
+  
+  try {
+    const { name, email, phone, subject, message, privacy } = req.body;
+
+    // Basic validation
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Required fields missing' });
     }
-}
 
-// Check if over limit
-if (requestCounts[ip].count > MAX_REQUESTS_PER_IP) {
-    return res.status(429).json({ 
-    error: 'Troppe richieste. Riprova più tardi.',
-    retryAfter: Math.ceil((requestCounts[ip].resetTime - Date.now()) / 1000 / 60) // minutes
-    });
-}
-
-next();
-};
-
-// Validate email format
-function isValidEmail(email) {
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-return emailRegex.test(email);
-}
-
-// Validate phone format (optional field)
-function isValidPhone(phone) {
-if (!phone) return true; // Phone is optional
-const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
-return phoneRegex.test(phone);
-}
-
-// Endpoint for the contact form
-app.post('/send-email', rateLimiter, async (req, res) => {
-const { name, email, phone, subject, message, privacy } = req.body;
-
-// Validate required fields
-if (!name || !email || !subject || !message) {
-    return res.status(400).json({ error: 'Tutti i campi obbligatori devono essere compilati.' });
-}
-
-// Validate email format
-if (!isValidEmail(email)) {
-    return res.status(400).json({ error: 'Formato email non valido.' });
-}
-
-// Validate phone if provided
-if (phone && !isValidPhone(phone)) {
-    return res.status(400).json({ error: 'Formato telefono non valido.' });
-}
-
-// Validate privacy consent
-if (!privacy) {
-    return res.status(400).json({ error: 'È necessario accettare la privacy policy.' });
-}
-
-try {
-    // Configure SMTP transporter
+    // Create transporter with same settings as test-email.js
     const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    secure: process.env.EMAIL_PORT === '465', // Use true for port 465, false for other ports
-    auth: {
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
+      secure: process.env.EMAIL_PORT === '465',
+      auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
-    },
+      },
+      tls: {
+        rejectUnauthorized: false
+      },
+      debug: true // Show debug output
     });
 
-    // Format the message with more details
-    const emailSubjectMap = {
-    'preventivo': 'Richiesta Preventivo',
-    'informazioni': 'Richiesta Informazioni',
-    'assistenza': 'Richiesta Assistenza Tecnica',
-    'collaborazione': 'Proposta di Collaborazione',
-    'altro': 'Altro'
-    };
+    // Verify connection first
+    console.log('Verifying SMTP connection...');
+    await transporter.verify();
+    console.log('SMTP connection verified');
 
-    const emailSubject = emailSubjectMap[subject] || 'Nuovo Messaggio dal Sito Web';
-
-    // Configure email content
-    const mailOptions = {
-    from: `"Modulo di Contatto 2M Lattonerie" <${process.env.EMAIL_USER}>`,
-    replyTo: `"${name}" <${email}>`,
-    to: process.env.EMAIL_RECEIVER,
-    subject: `${emailSubject} da ${name}`,
-    text: `
-    Nome: ${name}
-    Email: ${email}
-    ${phone ? `Telefono: ${phone}` : 'Telefono: Non fornito'}
-    Tipo di richiesta: ${emailSubjectMap[subject] || subject}
-    Messaggio:
-    ${message}
-
-    Questa email è stata inviata dal modulo di contatto sul sito web 2M Lattonerie.
-    Data e ora: ${new Date().toLocaleString('it-IT')}
-    `,
-        html: `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-    <div style="text-align: center; margin-bottom: 20px;">
-        <h2 style="color: #f39c12;">Nuovo Messaggio da 2M Lattonerie</h2>
-    </div>
-
-    <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-        <p><strong>Nome:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        ${phone ? `<p><strong>Telefono:</strong> ${phone}</p>` : ''}
-        <p><strong>Tipo di richiesta:</strong> ${emailSubjectMap[subject] || subject}</p>
-    </div>
-
-    <div style="margin-bottom: 20px;">
-        <h3 style="color: #293133;">Messaggio:</h3>
-        <p style="white-space: pre-line; background-color: #f9f9f9; padding: 15px; border-radius: 5px;">${message}</p>
-    </div>
-
-    <div style="font-size: 12px; color: #777; text-align: center; margin-top: 30px;">
-        <p>Questa email è stata inviata dal modulo di contatto sul sito web 2M Lattonerie.</p>
-        <p>Data e ora: ${new Date().toLocaleString('it-IT')}</p>
-    </div>
-    </div>
-    `
-    };
-
-    // Send email
-    await transporter.sendMail(mailOptions);
-
-    // Send confirmation to user
-    if (process.env.SEND_CONFIRMATION === 'true') {
-    const confirmationOptions = {
-        from: `"2M Lattonerie" <${process.env.EMAIL_USER}>`,
-        to: `"${name}" <${email}>`,
-        subject: 'Abbiamo ricevuto il tuo messaggio',
-        html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <h2 style="color: #f39c12;">Abbiamo ricevuto il tuo messaggio</h2>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <p>Gentile ${name},</p>
-            <p>Ti confermiamo che abbiamo ricevuto il tuo messaggio e ti risponderemo il prima possibile.</p>
-            <p>Grazie per averci contattato!</p>
-        </div>
-        
-        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-            <p><strong>Riepilogo della tua richiesta:</strong></p>
-            <p><strong>Tipo:</strong> ${emailSubjectMap[subject] || subject}</p>
-            <p><strong>Messaggio:</strong> ${message.substring(0, 100)}${message.length > 100 ? '...' : ''}</p>
-        </div>
-        
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
-            <p style="font-size: 14px;">Cordiali saluti,</p>
-            <p style="font-size: 14px;"><strong>Il Team di 2M Lattonerie</strong></p>
-            <p style="font-size: 12px;">Tel: +39 348 0820434 | Email: 2emme.lattonerie@gmail.com</p>
-            <p style="font-size: 12px;">Via Cesena Rivatte 20/B, Azzano Decimo (PN) 33082</p>
-        </div>
-        </div>
-        `
-    };
+    // Default subject if not provided
+    const emailSubject = subject || 'Messaggio dal sito web';
     
-    try {
-        await transporter.sendMail(confirmationOptions);
-    } catch (error) {
-        console.warn('Failed to send confirmation email:', error);
-        // Continue execution, don't fail the request if confirmation fails
-    }
-    }
+    // Simplified email options
+    const mailOptions = {
+      from: `"Modulo di Contatto" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_RECEIVER,
+      subject: `Messaggio da ${name} - ${emailSubject}`,
+      text: `
+Nome: ${name}
+Email: ${email}
+${phone ? `Telefono: ${phone}` : ''}
+Oggetto: ${subject || 'Non specificato'}
+Messaggio:
+${message}
+      `,
+      html: `
+<div style="font-family: Arial, sans-serif; padding: 20px;">
+  <h2>Nuovo messaggio dal sito web</h2>
+  <p><strong>Nome:</strong> ${name}</p>
+  <p><strong>Email:</strong> ${email}</p>
+  ${phone ? `<p><strong>Telefono:</strong> ${phone}</p>` : ''}
+  <p><strong>Oggetto:</strong> ${subject || 'Non specificato'}</p>
+  <h3>Messaggio:</h3>
+  <p>${message.replace(/\n/g, '<br>')}</p>
+</div>
+      `
+    };
 
-    res.status(200).json({ message: 'Email inviata con successo!' });
-} catch (error) {
-    console.error('Errore durante l\'invio dell\'email:', error);
-    res.status(500).json({ error: 'Errore durante l\'invio dell\'email. Si prega di riprovare più tardi.' });
-}
+    // Send email with more detailed logging
+    console.log('Sending email to:', process.env.EMAIL_RECEIVER);
+    console.log('From:', process.env.EMAIL_USER);
+    const info = await transporter.sendMail(mailOptions);
+    
+    console.log('Email sent successfully');
+    console.log('Message ID:', info.messageId);
+    
+    // Return success response
+    res.status(200).json({ 
+      message: 'Email inviata con successo!',
+      messageId: info.messageId
+    });
+    
+  } catch (error) {
+    console.error('ERROR SENDING EMAIL:');
+    console.error(error);
+    
+    res.status(500).json({ 
+      error: 'Errore durante l\'invio dell\'email',
+      details: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  }
 });
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.status(200).json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    env: {
+      EMAIL_HOST: process.env.EMAIL_HOST,
+      EMAIL_PORT: process.env.EMAIL_PORT,
+      EMAIL_USER: process.env.EMAIL_USER,
+      EMAIL_RECEIVER: process.env.EMAIL_RECEIVER,
+      NODE_ENV: process.env.NODE_ENV || 'development'
+    }
+  });
 });
 
 // Start server
 app.listen(PORT, () => {
-console.log(`Server in esecuzione su http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
+  console.log('Email configuration:');
+  console.log('- HOST:', process.env.EMAIL_HOST);
+  console.log('- PORT:', process.env.EMAIL_PORT);
+  console.log('- USER:', process.env.EMAIL_USER);
+  console.log('- RECEIVER:', process.env.EMAIL_RECEIVER);
 });

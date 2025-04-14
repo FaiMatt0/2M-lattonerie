@@ -133,36 +133,6 @@ if (window.innerWidth <= 768 && !window.location.href.includes('mobile.html')) {
     window.location.href = 'mobile.html';
 }
 
-// Inizializza il modulo di contatto
-document.getElementById('contactForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const formData = {
-        name: e.target.name.value,
-        email: e.target.email.value,
-        phone: e.target.phone.value,
-        message: e.target.message.value,
-    };
-
-    try {
-        const response = await fetch('https://tuodominio.com/send-email', { // Cambia con l'URL del tuo backend
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        });
-
-        if (response.ok) {
-            alert('Messaggio inviato con successo!');
-            e.target.reset();
-        } else {
-            alert('Errore durante l\'invio del messaggio.');
-        }
-    } catch (error) {
-        console.error('Errore:', error);
-        alert('Errore durante l\'invio del messaggio.');
-    }
-});
-
 // Gestione hover immagini galleria
 document.querySelectorAll('.gallery-item').forEach(item => {
     item.addEventListener('mouseenter', function() {
