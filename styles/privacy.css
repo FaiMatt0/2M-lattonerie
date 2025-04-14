@@ -1,3 +1,4 @@
+/* Desktop styles */
 .privacy-container {
     margin-left: 240px;
     padding: 20px;
@@ -7,13 +8,21 @@
     line-height: 1.8;
     background-color: #ffffff;
     border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     text-align: center;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow-y: visible;
 }
 
 .privacy-content {
     max-width: 100%;
     margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
 
 .privacy-content h1 {
@@ -38,10 +47,169 @@
     color: #293133;
 }
 
+/* Sidebar styles */
 aside {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 250px;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+aside .Links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+aside .Links li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+aside .Links li:hover {
+    color: #e67e22;
+}
+
+aside .Links li:hover i,
+aside .Links li:hover p {
+    color: #e67e22;
+}
+
+aside .Links li i {
+    font-size: 24px;
+    margin-right: 8px;
+    margin-bottom: 0;
+    color: #ffffff;
+}
+
+aside .Links li p {
+    margin: 0;
+    font-size: 16px;
+}
+
+aside .Links li.activeLink {
+    color: #ffffff;
+}
+
+/* Body and HTML default styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Mobile navigation styles */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #293133;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.mobile-nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.mobile-logo {
+    height: 40px;
+}
+
+.mobile-menu-toggle {
+    font-size: 24px;
+    color: #e67e22;
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+    background-color: #293133;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mobile-menu li {
+    padding: 12px 20px;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.mobile-menu li:hover {
+    background-color: rgba(230, 126, 34, 0.2);
+    color: #e67e22;
+}
+
+.mobile-menu li i {
+    margin-right: 10px;
+    color: #e67e22;
+}
+
+/* Mobile styles for privacy page */
+@media screen and (max-width: 768px) {
+    .mobile-nav {
+        display: block;
+    }
+    
+    aside {
+        display: none;
+        width: 0;
+        visibility: hidden;
+    }
+    
+    .privacy-container {
+        margin-left: 0;
+        margin-top: 60px;
+        width: 100%;
+        padding: 15px;
+        border-radius: 0;
+        position: relative;
+    }
+    
+    .privacy-content {
+        padding-top: 20px;
+        width: 100%;
+    }
+    
+    .privacy-content h1 {
+        font-size: 2rem;
+    }
+    
+    .privacy-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .privacy-content p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
 }
