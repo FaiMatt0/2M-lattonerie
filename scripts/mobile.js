@@ -348,3 +348,33 @@ galleryStyle.textContent = `
 `;
 
 document.head.appendChild(galleryStyle);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        // Get the tab to show based on data-tab attribute
+        const tabToShow = this.getAttribute('data-tab');
+        
+        // Hide all tab panels
+        document.querySelectorAll('.tab-panel').forEach(panel => {
+          panel.classList.remove('active');
+        });
+        
+        // Show the selected tab panel
+        if (tabToShow === 'info') {
+          document.getElementById('info-panel').classList.add('active');
+        } else if (tabToShow === 'form') {
+          document.getElementById('form-panel').classList.add('active');
+        }
+      });
+    });
+  });
+  

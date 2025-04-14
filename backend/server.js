@@ -74,12 +74,12 @@ app.post('/send-email', async (req, res) => {
       to: process.env.EMAIL_RECEIVER,
       subject: `Messaggio da ${name} - ${emailSubject}`,
       text: `
-Nome: ${name}
-Email: ${email}
-${phone ? `Telefono: ${phone}` : ''}
-Oggetto: ${subject || 'Non specificato'}
-Messaggio:
-${message}
+        Nome: ${name}
+        Email: ${email}
+        ${phone ? `Telefono: ${phone}` : ''}
+        Oggetto: ${subject || 'Non specificato'}
+        Messaggio:
+        ${message}
       `,
       html: `
 <div style="font-family: Arial, sans-serif; padding: 20px;">

@@ -217,7 +217,22 @@
                                     <a href="pages/workinprogress.html"><i class="fa-brands fa-facebook"></i></a>
                                 </div>
                             </h2>
-                            <input type="text" placeholder="Nome" required>
+                            <input type="text" placeholder="Il tuo nome" required>
+                            
+                            <!-- Wrap the select in a div -->
+                            <div class="select-container">
+                                <select id="subject" required>
+                                    <option value="" disabled selected>Seleziona un argomento</option>
+                                    <option value="preventivo">Richiesta preventivo</option>
+                                    <option value="informazioni">Informazioni generali</option>
+                                    <option value="assistenza">Assistenza tecnica</option>
+                                    <option value="collaborazione">Proposta di collaborazione</option>
+                                    <option value="altro">Altro</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down select-arrow"></i>
+                            </div>
+                            
+                            <input type="tel" placeholder="Il tuo numero di telefono" required>
                             <input type="email" placeholder="Email" required>
                             <textarea rows="10" placeholder="Scrivi il tuo messaggio..." required></textarea>
                             <button type="submit" class="primary">Invia</button>
@@ -240,5 +255,6 @@
         <script src="scripts/main.js"></script>
         <script src="backend/contact-form.js"></script>
         <script src="scripts/cookies.js"></script>
+        <script src="scripts/form-animations.js"></script>
     </body>
 </html>
