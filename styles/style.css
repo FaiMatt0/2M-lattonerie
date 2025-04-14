@@ -18,8 +18,6 @@ main {
     width: 100%;
 }
 
-
-
 /* Updated styles for the aside section */
 aside {
     width: 230px;
@@ -49,19 +47,6 @@ aside {
     max-width: 150px;
     height: auto;
     transition: transform 0.3s ease;
-}
-
-.Links {
-    display: flex;
-    flex-direction: column;
-    margin: 0; /* Remove automatic margins */
-    position: absolute; /* Position absolutely */
-    top: 50%; /* Position at 50% from the top */
-    transform: translateY(-50%); /* Center vertically */
-}
-
-.aside-logo img:hover {
-    transform: scale(1.1);
 }
 
 .Links {
