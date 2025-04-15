@@ -7,17 +7,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="icon" href="images/minilogonobg.png">
 </head>
 <body>
     <!-- Header Fisso -->
     <header class="swiper-header">
+        <div class="hamburger-menu">
+            <button id="menuToggle" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
         <div class="header-logo">
-            <img src="images/minilogonobg.png" alt="2M Lattonerie Logo">
-            <span>2M Lattonerie</span>
+            <span class="header-logo-text">2M Lattonerie</span>
         </div>
         <div class="swiper-pagination"></div>
     </header>
+
+    <!-- Mobile Navigation Menu -->
+    <nav id="mobileNav" class="mobile-nav">
+        <div class="nav-header">
+            <img src="images/minilogonobg.png" alt="2M Lattonerie Logo" class="nav-logo">
+            <button id="closeMenu" aria-label="Close menu">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active"><i class="fa-solid fa-home"></i> Home</a></li>
+            <li><a href="#about" class="nav-link"><i class="fa-solid fa-book-open"></i> Chi siamo</a></li>
+            <li><a href="#services" class="nav-link"><i class="fa-solid fa-list"></i> Servizi</a></li>
+            <li><a href="#gallery" class="nav-link"><i class="fa-solid fa-tools"></i> Lavori eseguiti</a></li>
+            <li><a href="#contact" class="nav-link"><i class="fa-solid fa-comments"></i> Contatti</a></li>
+        </ul>
+        <div class="nav-footer">
+            <a href="tel:+393480820434" class="quick-contact">
+                <i class="fa-solid fa-phone"></i> +39 348 0820434
+            </a>
+            <a href="mailto:2emme.lattonerie@gmail.com" class="quick-contact">
+                <i class="fa-solid fa-envelope"></i> 2emme.lattonerie@gmail.com
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Overlay for mobile menu -->
+    <div id="navOverlay" class="nav-overlay"></div>
 
     <!-- Container Principale Swiper -->
     <div class="swiper-container">
@@ -26,11 +59,13 @@
             <div class="swiper-slide" data-hash="home">
                 <div class="page-content">
                     <div class="home-content">
-                        <h1>"Da anni al vostro fianco, con <span>PRECISIONE E QUALITÀ</span>,</h1>
-                        <h2>per lavorazioni che <span>SFIDANO IL TEMPO"</span></h2>
-                         
+                        <div class="sideImg">
+                            <img src="./images/logo lattonerie.jpg" alt="Logo Lattonerie" style="max-width: 100%; height: auto;" class="animate__animated animate__flipInY">
+                        </div>
+                        <h1 class="animate__animated animate__backInUp">"Da anni al vostro fianco, con <span>PRECISIONE E QUALITÀ</span>,</h1>
+                        <h2 class="animate__animated animate__backInUp">per lavorazioni che <span>SFIDANO IL TEMPO"</span></h2>
                         <div class="scroll-citation">
-                            <p>Swipe to change page -></p>
+                            <p>Scorri per cambiare pagina -></p>
                         </div>
                     </div>
                 </div>
@@ -294,10 +329,10 @@
         </div>
     </div>
     
+    <script src="scripts/mobile-menu.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="scripts/mobile.js"></script>
     <script src="backend/contact-form.js"></script>
     <script src="scripts/cookies.js"></script>
 </body>
 </html>
-``` 
