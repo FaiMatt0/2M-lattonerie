@@ -82,9 +82,51 @@
                         <p><em>La nostra missione è creare opere che uniscano funzionalità ed estetica, rispettando tempi di consegna e aspettative.</em></p>
                         <p><em>Siamo orgogliosi di essere un punto di riferimento nel settore, grazie alla fiducia di chi ci sceglie.</em></p>
                     </div>
-                    <div class="section-buttons">
-                        <a href="#gallery" class="btn">I nostri lavori</a>
-                        <a href="#contact" class="btn">Contattaci</a>
+                    <div class="trusted-companies">
+                        <button id="showCompaniesBtn" class="trusted-companies-btn">
+                            <span>Aziende che hanno creduto in noi</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Companies Popup -->
+            <div id="companiesBox" class="companies-box-container">
+                <div class="companies-box-overlay"></div>
+                <div class="companies-box-content">
+                    <div class="companies-box-header">
+                        <h2 class="companies-box-title">Aziende che hanno creduto in noi</h2>
+                        <button class="close-companies-box" aria-label="Chiudi">&times;</button>
+                    </div>
+                    <div class="companies-box-body">
+                        <div class="companies-grid">
+                            <!-- Esempio di loghi aziende - Sostituisci con i veri loghi quando disponibili -->
+                            <div class="company-item">
+                                <img src="/api/placeholder/150/80" alt="Logo Azienda 1" class="company-logo">
+                                <div class="company-name">Azienda 1</div>
+                            </div>
+                            <div class="company-item">
+                                <img src="/api/placeholder/150/80" alt="Logo Azienda 2" class="company-logo">
+                                <div class="company-name">Azienda 2</div>
+                            </div>
+                            <div class="company-item">
+                                <img src="/api/placeholder/150/80" alt="Logo Azienda 3" class="company-logo">
+                                <div class="company-name">Azienda 3</div>
+                            </div>
+                            <div class="company-item">
+                                <img src="/api/placeholder/150/80" alt="Logo Azienda 4" class="company-logo">
+                                <div class="company-name">Azienda 4</div>
+                            </div>
+                            <div class="company-item">
+                                <img src="/api/placeholder/150/80" alt="Logo Azienda 5" class="company-logo">
+                                <div class="company-name">Azienda 5</div>
+                            </div>
+                            <div class="company-item">
+                                <img src="/api/placeholder/150/80" alt="Logo Azienda 6" class="company-logo">
+                                <div class="company-name">Azienda 6</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -209,7 +251,7 @@
         
         <div class="tab-content">
             <!-- Info Tab -->
-            <div class="tab-panel active" id="info-panel">
+            <div class="tab-panel active" id="info-panel"> 
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fa-solid fa-mobile-alt"></i>
@@ -306,15 +348,6 @@
             </div>
         </div>
     </div>
-    
-    <div id="cookieConsent" class="cookies-consent">
-        <p>Utilizziamo i cookie per garantire la migliore esperienza.</p>
-        <a href="pages/privacy.html" class="privacy-link">Scopri di più</a>
-        <div class="cookies-buttons">
-            <button id="acceptBtn" class="accept-cookies-btn">Accetta</button>
-            <button id="rejectBtn" class="reject-cookies-btn">Rifiuta</button>
-        </div>
-    </div>
 
     <div id="serviceBox" class="service-box-container">
         <div class="service-box-overlay" onclick="closeService()"></div>
@@ -334,6 +367,6 @@
     <script src="scripts/mobile.js"></script>
     <script src="backend/contact-form.js"></script>
     <script src="scripts/cookies.js"></script>
-    <script src="scripts/service-cards.js"></script>
+    <script src="scripts/popups.js"></script>
 </body>
 </html>
