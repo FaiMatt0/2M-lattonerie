@@ -26,37 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Make swiper globally available
   window.swiper = swiper;
   
-  // Directly attach click event listeners to service cards
-  const serviceCards = document.querySelectorAll('.service-card');
-  serviceCards.forEach((card, index) => {
-      card.addEventListener('click', function() {
-          openService(index);
-      });
-  });
-
-  // Close when pressing ESC - Fix function name here
-  document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && document.getElementById('serviceBox').classList.contains('active')) {
-          closeService(); // Changed from closeServiceBox to closeService
-      }
-  });
-  
-  // Add event listener to close button in service box
-  const closeBtn = document.getElementById('serviceBoxClose');
-  if (closeBtn) {
-      closeBtn.addEventListener('click', closeService);
-  }
-  
-  // Close on overlay click (if applicable)
-  const serviceBox = document.getElementById('serviceBox');
-  if (serviceBox) {
-      serviceBox.addEventListener('click', function(e) {
-          if (e.target === serviceBox) {
-              closeService();
-          }
-      });
-  }
-
   // Create lightbox elements
   const lightbox = document.createElement('div');
   lightbox.className = 'gallery-lightbox';

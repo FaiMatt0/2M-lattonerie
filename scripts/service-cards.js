@@ -1,3 +1,6 @@
+// Debug
+console.log("service-cards.js caricato");
+
 // Service data - defined globally to ensure accessibility
 const servicesData = [
     {
@@ -14,9 +17,11 @@ const servicesData = [
     }
 ];
 
-// Service box functions defined globally
+console.log("servicesData:", servicesData);
+
+// Definizione diretta senza complessità aggiuntive
 function openService(index) {
-    console.log("openService chiamata con indice:", index); // Debug
+    console.log("openService chiamata con indice:", index);
     
     const serviceBox = document.getElementById('serviceBox');
     if (!serviceBox) {
@@ -60,7 +65,7 @@ function openService(index) {
 }
 
 function closeService() {
-    console.log("closeService chiamata"); // Debug
+    console.log("closeService chiamata");
     
     const serviceBox = document.getElementById('serviceBox');
     if (!serviceBox) {
@@ -92,56 +97,14 @@ function closeService() {
     }, 300); // Match this timing with your CSS transition duration
 }
 
+// Inizializzazione al caricamento del documento
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Swiper
-    const swiper = new Swiper('.swiper-container', {
-        direction: 'horizontal',
-        slidesPerView: 1,
-        spaceBetween: 0,
-        grabCursor: true,
-        allowTouchMove: true,
-        resistance: true,
-        resistanceRatio: 0,
-        speed: 300,
-        hashNavigation: {
-            watchState: true,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            dynamicBullets: true,
-        },
-        keyboard: {
-            enabled: true,
-            onlyInViewport: false,
-        },
-    });
-    
-    // Make swiper globally available
-    window.swiper = swiper;
-    
-    // IMPORTANTE: Rimuovere gli onclick HTML per evitare doppie chiamate
-    // Se non puoi modificare l'HTML, lascia solo un metodo di gestione
-    // Commenta questa sezione e usa solo gli onclick HTML
-    /*
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach((card, index) => {
-        card.addEventListener('click', function() {
-            openService(index);
-        });
-    });
-    */
-    
-    // Close when pressing ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && document.getElementById('serviceBox').classList.contains('active')) {
-            closeService();
-        }
-    });
+    console.log("DOMContentLoaded in service-cards.js");
     
     // Aggiungi event listener al pulsante di chiusura
     const closeServiceButton = document.querySelector('.close-service-box');
     if (closeServiceButton) {
+        console.log("Aggiungo event listener al pulsante di chiusura");
         closeServiceButton.addEventListener('click', closeService);
     } else {
         console.error("Pulsante di chiusura non trovato!");
@@ -150,12 +113,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Aggiungi event listener al service box overlay
     const overlay = document.querySelector('.service-box-overlay');
     if (overlay) {
+        console.log("Aggiungo event listener all'overlay");
         overlay.addEventListener('click', closeService);
     } else {
         console.error("Overlay non trovato!");
     }
+    
+    // Close when pressing ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && document.getElementById('serviceBox').classList.contains('active')) {
+            closeService();
+        }
+    });
+    
+    // Verifica che gli elementi necessari esistano
+    console.log("Elementi presenti:");
+    console.log("- serviceBox:", document.getElementById('serviceBox') !== null);
+    console.log("- serviceBoxTitle:", document.getElementById('serviceBoxTitle') !== null);
+    console.log("- serviceBoxContent:", document.getElementById('serviceBoxContent') !== null);
+    
+    // Verifica che onclick funzioni
+    const serviceCards = document.querySelectorAll('.service-card');
+    console.log("Numero di service-card trovate:", serviceCards.length);
+    serviceCards.forEach((card, index) => {
+        console.log(`Service card ${index} onclick:`, card.getAttribute('onclick'));
+    });
 });
 
-// Se preferisci mantenere gli onclick inline, assicurati che siano definiti globalmente
+// Rendi le funzioni accessibili globalmente
 window.openService = openService;
 window.closeService = closeService;
+console.log("Funzioni esposte globalmente");
