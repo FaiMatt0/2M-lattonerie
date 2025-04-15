@@ -152,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>   
 
             <!-- Improved Contact Section -->
 <div class="swiper-slide" data-hash="contact">
@@ -271,21 +271,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Service Box HTML (MOVED HERE) -->
-    <div id="serviceBox" class="service-box-container">
-        <div class="service-box-overlay" onclick="closeServiceBox()"></div>
-        <div class="service-box-content">
-            <div class="service-box-header">
-                <h2 class="service-box-title" id="serviceBoxTitle">Service Title</h2>
-                <button class="close-service-box" onclick="closeServiceBox()">&times;</button>
-            </div>
-            <div class="service-box-body" id="serviceBoxContent">
-                Service content will appear here...
-            </div>
-        </div>
-    </div>
-
+    
     <div id="cookieConsent" class="cookies-consent">
         <p>Utilizziamo i cookie per garantire la migliore esperienza.</p>
         <a href="pages/privacy.html" class="privacy-link">Scopri di più</a>
@@ -294,6 +280,20 @@
             <button id="rejectBtn" class="reject-cookies-btn">Rifiuta</button>
         </div>
     </div>
+
+    <div id="serviceBox" class="service-box-container">
+        <div class="service-box-overlay" onclick="closeService()"></div>
+        <div class="service-box-content">
+            <div class="service-box-header">
+                <h2 class="service-box-title" id="serviceBoxTitle">Service Title</h2>
+                <button class="close-service-box" onclick="closeService()">&times;</button>
+            </div>
+            <div class="service-box-body" id="serviceBoxContent">
+                Service content will appear here...
+            </div>
+        </div>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="scripts/mobile.js"></script>
     <script src="backend/contact-form.js"></script>
