@@ -603,6 +603,14 @@ html, body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .contact-item i {
@@ -619,6 +627,23 @@ html, body {
 .contact-item p {
     font-size: 0.9rem;
     color: #ddd;
+}
+
+/* Contact animation styling */
+.contact-animation-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+/* Responsive sizing for smaller devices */
+@media (max-width: 375px) {
+    .contact-animation-img {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 /* Social Media Bar */
@@ -1252,6 +1277,10 @@ select:valid:not([value=""]) {
 
 .quick-contact i {
     margin-right: 8px;
+}
+
+#last {
+    margin-bottom: 50px;
 }
 
 /* Trusted Companies Section */
