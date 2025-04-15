@@ -171,9 +171,10 @@ html, body {
     text-align: center;
     position: fixed;
     bottom: 80px; /* Increased from 50px to be higher on screen */
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    width: 100%;
     z-index: 1000;
+    padding: 0 15px; /* Add padding for better readability on small screens */
 }
 
 .sideImg {
