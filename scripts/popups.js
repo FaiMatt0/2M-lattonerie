@@ -50,24 +50,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const companiesGrid = document.createElement('div');
     companiesGrid.className = 'companies-grid';
     
-    // Aggiungi 10 aziende di esempio (modificato da 6 a 10)
-    for (let i = 1; i <= 10; i++) {
+    // Array of real companies with their image paths and names
+    const companies = [
+        { name: "Artedil", imagePath: "images/aziende/artedil.jpg" },
+        { name: "Bellunese", imagePath: "images/aziende/bellunese.png" },
+        { name: "Canapulo", imagePath: "images/aziende/canapulo.jpg" },
+        { name: "Fasan", imagePath: "images/aziende/fasan.png" },
+        { name: "Gregoul", imagePath: "images/aziende/gregoul.jpg" },
+        { name: "IZC", imagePath: "images/aziende/izc.png" },
+        { name: "Manelli", imagePath: "images/aziende/manelli.jpg" },
+        { name: "Moschetta", imagePath: "images/aziende/moschetta.png" },
+        { name: "Novedil", imagePath: "images/aziende/novedil.png" },
+        { name: "Spagnol", imagePath: "images/aziende/spagnol.png" }
+    ];
+    
+    // Create company items with real data
+    companies.forEach(company => {
         const companyItem = document.createElement('div');
         companyItem.className = 'company-item';
         
         const companyLogo = document.createElement('img');
-        companyLogo.src = 'images/minilogonobg.png'; // Usa un'immagine esistente
-        companyLogo.alt = `Logo Azienda ${i}`;
+        companyLogo.src = company.imagePath;
+        companyLogo.alt = company.name;
         companyLogo.className = 'company-logo';
         
         const companyName = document.createElement('div');
         companyName.className = 'company-name';
-        companyName.textContent = `Azienda ${i}`;
+        companyName.textContent = company.name;
         
         companyItem.appendChild(companyLogo);
         companyItem.appendChild(companyName);
         companiesGrid.appendChild(companyItem);
-    }
+    });
     
     companiesBody.appendChild(companiesGrid);
     companiesPopupContent.appendChild(closeCompaniesBtn);

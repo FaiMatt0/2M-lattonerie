@@ -286,4 +286,57 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Form validation result:', isValid);
         return isValid;
     }
+    
+    // Function to load company images
+    function loadCompanyImages() {
+        // Find company images containers for both desktop and mobile
+        const desktopCompanyContainer = document.querySelector('.partners-container');
+        const mobileCompanyContainer = document.querySelector('.mobile-partners-container');
+        
+        // List of company images in the images/aziende folder
+        const companyImages = [
+            'images/aziende/company1.png',
+            'images/aziende/company2.png',
+            'images/aziende/company3.png',
+            'images/aziende/company4.png',
+            'images/aziende/company5.png',
+            'images/aziende/company6.png'
+            // Add more images as needed
+        ];
+        
+        // Function to create company image elements
+        function createCompanyElements(container) {
+            if (!container) return;
+            
+            console.log('Setting up company images for container:', container.className);
+            
+            // Clear existing content
+            container.innerHTML = '';
+            
+            // Add company images
+            companyImages.forEach(imageSrc => {
+                const companyDiv = document.createElement('div');
+                companyDiv.className = 'partner-logo';
+                
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.alt = 'Partner aziendale';
+                img.loading = 'lazy';
+                
+                companyDiv.appendChild(img);
+                container.appendChild(companyDiv);
+            });
+        }
+        
+        // Apply to desktop container
+        createCompanyElements(desktopCompanyContainer);
+        
+        // Apply to mobile container
+        createCompanyElements(mobileCompanyContainer);
+        
+        console.log('Company images loaded successfully');
+    }
+    
+    // Load company images when the page loads
+    loadCompanyImages();
 });
