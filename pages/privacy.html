@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <link rel="stylesheet" href="../styles/privacy.css">
         <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
         <title>Privacy - 2M Lattonerie SRLS</title>
         <link rel="icon" href="../images/minilogonobg.png" type="image/x-icon">
     </head>
@@ -14,7 +15,7 @@
         <!-- Desktop sidebar -->
         <aside>
             <div class="aside-logo" onclick="location.href='../index.html'" style="cursor: pointer;">
-                <img src="../images/minilogonobg.png" alt="2M Lattonerie Logo">
+                <img src="../images/minilogonobg.png" alt="2M Lattonerie Logo" class="animate__animated animate__zoomInDown">
             </div>
             <ul class="Links">
                 <li onclick="location.href='../index.html'"><i class="fa-solid fa-house"></i>
@@ -23,24 +24,45 @@
             </ul>
         </aside>
         
-        <!-- Mobile navigation -->
-        <div class="mobile-nav">
-            <div class="mobile-nav-header">
-                <img src="../images/minilogonobg.png" alt="2M Lattonerie Logo" class="mobile-logo">
-                <span class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <!-- Mobile Header -->
+        <header class="swiper-header">
+            <div class="hamburger-menu">
+                <button id="menuToggle" aria-label="Toggle menu">
                     <i class="fa-solid fa-bars"></i>
-                </span>
+                </button>
             </div>
-            <div class="mobile-menu" id="mobileMenu">
-                <ul>
-                    <li onclick="location.href='../index.html'"><i class="fa-solid fa-house"></i> Home</li>
-                    <li onclick="location.href='../index.html#chi-siamo'"><i class="fa-solid fa-book-open"></i> Chi siamo</li>
-                    <li onclick="location.href='../index.html#servizi'"><i class="fa-solid fa-list"></i> Servizi</li>
-                    <li onclick="location.href='../index.html#lavori'"><i class="fa-solid fa-tools"></i> Lavori eseguiti</li>
-                    <li onclick="location.href='../index.html#contatti'"><i class="fa-solid fa-comments"></i> Contatti</li>
-                </ul>
+            <div class="header-logo">
+                <span class="header-logo-text">2M Lattonerie</span>
             </div>
-        </div>
+        </header>
+        
+        <!-- Mobile navigation -->
+        <nav id="mobileNav" class="mobile-nav">
+            <div class="nav-header">
+                <img src="../images/minilogonobg.png" alt="2M Lattonerie Logo" class="nav-logo">
+                <button id="closeMenu" aria-label="Close menu">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-link"><i class="fa-solid fa-home"></i> Home</a></li>
+                <li><a href="../index.html#about" class="nav-link"><i class="fa-solid fa-book-open"></i> Chi siamo</a></li>
+                <li><a href="../index.html#services" class="nav-link"><i class="fa-solid fa-list"></i> Servizi</a></li>
+                <li><a href="../index.html#gallery" class="nav-link"><i class="fa-solid fa-tools"></i> Lavori eseguiti</a></li>
+                <li><a href="../index.html#contact" class="nav-link"><i class="fa-solid fa-comments"></i> Contatti</a></li>
+            </ul>
+            <div class="nav-footer">
+                <a href="tel:+393480820434" class="quick-contact">
+                    <i class="fa-solid fa-phone"></i> +39 348 0820434
+                </a>
+                <a href="mailto:2emme.lattonerie@gmail.com" class="quick-contact">
+                    <i class="fa-solid fa-envelope"></i> 2emme.lattonerie@gmail.com
+                </a>
+            </div>
+        </nav>
+        
+        <!-- Overlay for mobile menu -->
+        <div id="navOverlay" class="nav-overlay"></div>
         
         <div class="privacy-container">
             <div class="privacy-content">
@@ -123,43 +145,51 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
         <script src="../scripts/main.js"></script>
         <script>
-            // Mobile menu toggle function
-            function toggleMobileMenu() {
-                const mobileMenu = document.getElementById('mobileMenu');
-                if (mobileMenu.style.display === 'block') {
-                    mobileMenu.style.display = 'none';
-                } else {
-                    mobileMenu.style.display = 'block';
-                }
-            }
-            
-            // Handle responsive display
-            function handleResize() {
-                const mobileNav = document.querySelector('.mobile-nav');
-                
-                if (window.innerWidth > 768) {
-                    if (mobileNav) mobileNav.style.display = 'none';
-                } else {
-                    if (mobileNav) mobileNav.style.display = 'block';
-                }
-            }
-            
-            // Initialize on load
+            // Mobile menu toggle functionality
             document.addEventListener('DOMContentLoaded', function() {
-                handleResize();
-                window.addEventListener('resize', handleResize);
+                const menuToggle = document.getElementById('menuToggle');
+                const closeMenu = document.getElementById('closeMenu');
+                const mobileNav = document.getElementById('mobileNav');
+                const navOverlay = document.getElementById('navOverlay');
                 
-                // Fix for mobile redirect
-                if (window.innerWidth <= 768) {
-                    // Don't redirect to mobile.html from privacy page
-                    const mobileLinkCheck = document.querySelector('script');
-                    if (mobileLinkCheck) {
-                        mobileLinkCheck.innerHTML = mobileLinkCheck.innerHTML.replace(
-                            "if (window.innerWidth <= 768 && !window.location.href.includes('mobile.html'))",
-                            "if (window.innerWidth <= 768 && !window.location.href.includes('mobile.html') && !window.location.href.includes('privacy.html'))"
-                        );
+                // Open menu
+                if (menuToggle) {
+                    menuToggle.addEventListener('click', function() {
+                        mobileNav.classList.add('open');
+                        navOverlay.classList.add('open');
+                        document.body.style.overflow = 'hidden';
+                    });
+                }
+                
+                // Close menu
+                if (closeMenu) {
+                    closeMenu.addEventListener('click', function() {
+                        mobileNav.classList.remove('open');
+                        navOverlay.classList.remove('open');
+                        document.body.style.overflow = '';
+                    });
+                }
+                
+                // Close when clicking overlay
+                if (navOverlay) {
+                    navOverlay.addEventListener('click', function() {
+                        mobileNav.classList.remove('open');
+                        navOverlay.classList.remove('open');
+                        document.body.style.overflow = '';
+                    });
+                }
+                
+                // Handle responsive display
+                function handleResize() {
+                    if (window.innerWidth > 768) {
+                        if (mobileNav) mobileNav.classList.remove('open');
+                        if (navOverlay) navOverlay.classList.remove('open');
+                        document.body.style.overflow = '';
                     }
                 }
+                
+                window.addEventListener('resize', handleResize);
+                handleResize();
                 
                 // Force scroll to top on load
                 window.scrollTo(0, 0);
