@@ -206,7 +206,7 @@ html, body {
 .section-title {
     color: #f39c12;
     font-size: 1.8rem;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -710,6 +710,7 @@ html, body {
 .tab-panel {
     display: none;
     animation: fadeIn 0.5s ease;
+    margin-bottom: 50px;
 }
 
 .tab-panel.active {
@@ -1279,10 +1280,6 @@ select:valid:not([value=""]) {
     margin-right: 8px;
 }
 
-#last {
-    margin-bottom: 50px;
-}
-
 /* Trusted Companies Section */
 .trusted-companies {
     text-align: center;
@@ -1295,6 +1292,7 @@ select:valid:not([value=""]) {
     justify-content: center;
     gap: 10px;
     margin: 0 auto;
+    margin-bottom: 50px;
     padding: 12px 20px;
     background-color: #f39c12;
     color: #293133;

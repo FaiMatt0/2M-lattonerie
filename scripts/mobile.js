@@ -26,6 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
   // Make swiper globally available
   window.swiper = swiper;
   
+  // Add functionality for the about page animation
+  if (swiper) {
+    swiper.on('slideChange', function() {
+      // If navigating to slide index 1 (about page)
+      if (this.activeIndex === 1 && window.runAboutAnimation) {
+        window.runAboutAnimation();
+      }
+    });
+    
+    // Run animation if already on the about page
+    if (swiper.activeIndex === 1 && window.runAboutAnimation) {
+      window.runAboutAnimation();
+    }
+  }
+  
   // Create lightbox elements
   const lightbox = document.createElement('div');
   lightbox.className = 'gallery-lightbox';
@@ -301,6 +316,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('info-panel').classList.add('active');
       } else if (tabToShow === 'form') {
         document.getElementById('form-panel').classList.add('active');
+      }
+      
+      // If about tab was clicked
+      if (tabToShow === 'about' && window.runAboutAnimation) {
+        setTimeout(() => window.runAboutAnimation(), 300);
+      }
+    });
+  });
+  
+  // For direct navigation links
+  const aboutLinks = document.querySelectorAll('a[href="#about"], a[href="#chi-siamo"]');
+  aboutLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.runAboutAnimation) {
+        setTimeout(() => window.runAboutAnimation(), 300);
       }
     });
   });

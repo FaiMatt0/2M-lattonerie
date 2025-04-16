@@ -21,6 +21,16 @@ function Navigate(indx) {
     for (let i of document.querySelectorAll(".Links li")) i.classList.remove("activeLink")
     Array.from(document.querySelectorAll(".Links li"))[indx].classList.add("activeLink")
     swiper.slideTo(indx, 1000, true)
+    
+    // Dispatch a custom event that our typewriter.js can listen for
+    document.dispatchEvent(new CustomEvent('swiperNavigate', { 
+        detail: indx 
+    }));
+    
+    // If navigating directly to about page, run animation
+    if (indx === 1 && window.runAboutAnimation) {
+        window.runAboutAnimation();
+    }
 }
 
 function GoToHome() {
