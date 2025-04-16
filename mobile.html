@@ -12,6 +12,16 @@
     <link rel="icon" href="images/minilogonobg.png">
 </head>
 <body>
+    <!-- Splash Screen with Video -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <video id="intro-video" autoplay muted>
+                <source src="videos/video_mobile.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    
     <!-- Header Fisso -->
     <header class="swiper-header">
         <div class="hamburger-menu">
@@ -22,7 +32,6 @@
         <div class="header-logo">
             <span class="header-logo-text">2M Lattonerie</span>
         </div>
-        <div class="swiper-pagination"></div>
     </header>
 
     <!-- Mobile Navigation Menu -->
@@ -61,10 +70,10 @@
                 <div class="page-content">
                     <div class="home-content">
                         <div class="sideImg">
-                            <img src="./images/logo lattonerie.jpg" alt="Logo Lattonerie" style="max-width: 100%; height: auto;" class="animate__animated animate__flipInY">
+                            <img src="./images/logo lattonerie.jpg" alt="Logo Lattonerie" style="max-width: 100%; height: auto;" class="animate__animated animate__flipInY" data-animation-class="animate__animated animate__flipInY">
                         </div>
-                        <h1 class="animate__animated animate__backInDown">"Da anni al vostro fianco, con <span>PRECISIONE E QUALITÀ</span>,</h1>
-                        <h2 class="animate__animated animate__backInUp">per lavorazioni che <span>SFIDANO IL TEMPO"</span></h2>
+                        <h1 class="animate__animated animate__backInDown" data-animation-class="animate__animated animate__backInDown">"Da anni al vostro fianco, con <span>PRECISIONE E QUALITÀ</span>,</h1>
+                        <h2 class="animate__animated animate__backInUp" data-animation-class="animate__animated animate__backInUp">per lavorazioni che <span>SFIDANO IL TEMPO"</span></h2>
                         <div class="scroll-citation">
                             <p>Scorri per cambiare pagina -></p>
                         </div>
@@ -75,7 +84,7 @@
             <!-- Pagina 2: About -->
             <div class="swiper-slide" data-hash="about">
                 <div class="page-content dark-bg">
-                    <h1 class="section-title">"La nostra STORIA"</h1>
+                    <h1 class="section-title animate__animated">"La nostra STORIA"</h1>
                     <div class="about-content">
                         <p style="font-size: 1.2em; font-family: 'Roboto Condensed', sans-serif; line-height: 1.8em;" class="about-text-line" data-delay="0.2">
                             <em>"Da più di 20 anni offriamo soluzioni personalizzate per soddisfare ogni esigenza, garantendo qualità, precisione e durata nel tempo.</em>
@@ -144,7 +153,7 @@
             <!-- Pagina 3: Servizi -->
             <div class="swiper-slide" data-hash="services">
                 <div class="page-content">
-                    <h1 class="section-title">"I nostri servizi"</h1>
+                    <h1 class="section-title animate__animated">"I nostri servizi"</h1>
                     <div class="services-grid">
                         <!-- Servizio 1 -->
                         <div class="service-card" data-service-index="0">
@@ -176,7 +185,7 @@
             <!-- Improved Gallery Section HTML -->
             <div class="swiper-slide" data-hash="gallery">
                 <div class="page-content dark-bg">
-                    <h1 class="section-title">"I nostri LAVORI"</h1>
+                    <h1 class="section-title animate__animated">"I nostri LAVORI"</h1>
                     <div class="mobile-gallery-container">
                         <!-- Riga 1 -->
                         <div class="gallery-row">
@@ -242,119 +251,122 @@
             </div>   
 
             <!-- Improved Contact Section -->
-<div class="swiper-slide" data-hash="contact">
-    <div class="page-content">
-        <h1 class="section-title">Contattaci</h1>
-        
-        <!-- Social Media Bar -->
-        <div class="social-media-bar">
-            <a href="pages/workinprogress.html"><img src="images/facebook animata.gif" alt="Facebook" class="social-icon"></a>
-            <a href="pages/workinprogress.html"><img src="images/instagram animata.gif" alt="Instagram" class="social-icon"></a>
-            <a href="pages/workinprogress.html"><img src="images/whatsapp animata.gif" alt="Whatsapp" class="social-icon"></a>
-            <a href="pages/workinprogress.html"><img src="images/linkedin animata.gif" alt="LinkedIn" class="social-icon"></a>
-        </div>
-        
-        <div class="contact-tabs">
-            <button class="tab-button active" data-tab="info">Info</button>
-            <button class="tab-button" data-tab="form">Scrivici</button>
-        </div>
-        
-        <div class="tab-content">
-            <!-- Info Tab -->
-            <div class="tab-panel active" id="info-panel"> 
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <img src="images/telefono animata.gif" alt="Telefono" class="contact-animation-img">
-                        <h3>Telefono</h3>
-                        <p><a href="tel:+393480820434">+39 348 0820434</a></p>
+            <div class="swiper-slide" data-hash="contact">
+                <div class="page-content">
+                    <h1 class="section-title animate__animated">Contattaci</h1>
+                    
+                    <!-- Social Media Bar -->
+                    <div class="social-media-bar">
+                        <a href="pages/workinprogress.html"><img src="images/facebook animata.gif" alt="Facebook" class="social-icon"></a>
+                        <a href="pages/workinprogress.html"><img src="images/instagram animata.gif" alt="Instagram" class="social-icon"></a>
+                        <a href="pages/workinprogress.html"><img src="images/whatsapp animata.gif" alt="Whatsapp" class="social-icon"></a>
+                        <a href="pages/workinprogress.html"><img src="images/linkedin animata.gif" alt="LinkedIn" class="social-icon"></a>
                     </div>
-                    <div class="contact-item">
-                        <img src="images/indirizzo animata.gif" alt="Mappa" class="contact-animation-img">
-                        <h3>Dove siamo</h3>
-                        <p>Via Cesena Rivatte 20/B<br>Azzano Decimo (PN) 33082</p>
-                        <a href="https://maps.google.com/?q=Via+Cesena+Rivatte+20/B,+Azzano+Decimo,+PN,+33082" class="map-link">
-                            <i class="fa-solid fa-location-arrow"></i> Apri Maps
-                        </a>
+                    
+                    <div class="contact-tabs">
+                        <button class="tab-button active" data-tab="info">Info</button>
+                        <button class="tab-button" data-tab="form">Scrivici</button>
                     </div>
-                    <div class="contact-item">
-                        <img src="images/mail animata.gif" alt="Email" class="contact-animation-img">
-                        <h3>Email</h3>
-                        <p><a href="mailto:2emme.lattonerie@gmail.com">2emme.lattonerie@gmail.com</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <img src="images/orologio animata.gif" alt="Orari" class="contact-animation-img">
-                        <h3>Orari</h3>
-                        <p>Lun-Ven: 8:00 - 18:00<br>Sab: 8:00 - 12:00</p>
-                    </div>
-                    <div class="contact-item">
-                        <img src="images/partita iva animata.gif" alt="Orari" class="contact-animation-img">
-                        <h3>Partita IVA</h3>
-                        <p>01920980933</p>
+                    
+                    <div class="tab-content">
+                        <!-- Info Tab -->
+                        <div class="tab-panel active" id="info-panel"> 
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <img src="images/telefono animata.gif" alt="Telefono" class="contact-animation-img">
+                                    <h3>Telefono</h3>
+                                    <p><a href="tel:+393480820434">+39 348 0820434</a></p>
+                                </div>
+                                <div class="contact-item">
+                                    <img src="images/indirizzo animata.gif" alt="Mappa" class="contact-animation-img">
+                                    <h3>Dove siamo</h3>
+                                    <p>Via Cesena Rivatte 20/B<br>Azzano Decimo (PN) 33082</p>
+                                    <a href="https://maps.google.com/?q=Via+Cesena+Rivatte+20/B,+Azzano+Decimo,+PN,+33082" class="map-link">
+                                        <i class="fa-solid fa-location-arrow"></i> Apri Maps
+                                    </a>
+                                </div>
+                                <div class="contact-item">
+                                    <img src="images/mail animata.gif" alt="Email" class="contact-animation-img">
+                                    <h3>Email</h3>
+                                    <p><a href="mailto:2emme.lattonerie@gmail.com">2emme.lattonerie@gmail.com</a></p>
+                                </div>
+                                <div class="contact-item">
+                                    <img src="images/orologio animata.gif" alt="Orari" class="contact-animation-img">
+                                    <h3>Orari</h3>
+                                    <p>Lun-Ven: 8:00 - 18:00<br>Sab: 8:00 - 12:00</p>
+                                </div>
+                                <div class="contact-item">
+                                    <img src="images/partita iva animata.gif" alt="Orari" class="contact-animation-img">
+                                    <h3>Partita IVA</h3>
+                                    <p>01920980933</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Tab -->
+                        <div class="tab-panel" id="form-panel">
+                            <form class="contact-form" id="contactForm">
+                                <div class="form-group">
+                                    <label for="name">Nome*</label>
+                                    <input type="text" id="name" placeholder="Il tuo nome" required>
+                                    <span class="form-error" id="nameError"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email*</label>
+                                    <input type="email" id="email" placeholder="La tua email" required>
+                                    <span class="form-error" id="emailError"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Telefono</label>
+                                    <input type="tel" id="phone" placeholder="Il tuo numero di telefono">
+                                    <span class="form-error" id="phoneError"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject">Oggetto*</label>
+                                    <select id="subject" required>
+                                        <option value="" disabled selected>Seleziona un argomento</option>
+                                        <option value="preventivo">Richiesta preventivo</option>
+                                        <option value="informazioni">Informazioni generali</option>
+                                        <option value="assistenza">Assistenza tecnica</option>
+                                        <option value="collaborazione">Proposta di collaborazione</option>
+                                        <option value="altro">Altro</option>
+                                    </select>
+                                    <span class="form-error" id="subjectError"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Messaggio*</label>
+                                    <textarea id="message" placeholder="Il tuo messaggio..." required></textarea>
+                                    <span class="form-error" id="messageError"></span>
+                                </div>
+                                
+                                <div class="form-group checkbox-group">
+                                    <input type="checkbox" id="privacy" required>
+                                    <label for="privacy">Ho letto e accetto la <a href="pages/privacy.html">privacy policy</a>*</label>
+                                    <span class="form-error" id="privacyError"></span>
+                                </div>
+                                
+                                <button type="submit" class="btn submit-btn">
+                                    <span class="btn-text">Invia Richiesta</span>
+                                    <span class="btn-icon"><i class="fa-solid fa-paper-plane"></i></span>
+                                </button>
+                                
+                                <div class="form-feedback success" id="formSuccess">
+                                    <i class="fa-solid fa-check-circle"></i>
+                                    <p>Messaggio inviato con successo! Ti risponderemo presto.</p>
+                                </div>
+                                
+                                <div class="form-feedback error" id="formError">
+                                    <i class="fa-solid fa-exclamation-circle"></i>
+                                    <p>Si è verificato un errore. Riprova più tardi o contattaci direttamente.</p>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Form Tab -->
-            <div class="tab-panel" id="form-panel">
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Nome*</label>
-                        <input type="text" id="name" placeholder="Il tuo nome" required>
-                        <span class="form-error" id="nameError"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email*</label>
-                        <input type="email" id="email" placeholder="La tua email" required>
-                        <span class="form-error" id="emailError"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">Telefono</label>
-                        <input type="tel" id="phone" placeholder="Il tuo numero di telefono">
-                        <span class="form-error" id="phoneError"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Oggetto*</label>
-                        <select id="subject" required>
-                            <option value="" disabled selected>Seleziona un argomento</option>
-                            <option value="preventivo">Richiesta preventivo</option>
-                            <option value="informazioni">Informazioni generali</option>
-                            <option value="assistenza">Assistenza tecnica</option>
-                            <option value="collaborazione">Proposta di collaborazione</option>
-                            <option value="altro">Altro</option>
-                        </select>
-                        <span class="form-error" id="subjectError"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Messaggio*</label>
-                        <textarea id="message" placeholder="Il tuo messaggio..." required></textarea>
-                        <span class="form-error" id="messageError"></span>
-                    </div>
-                    
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="privacy" required>
-                        <label for="privacy">Ho letto e accetto la <a href="pages/privacy.html">privacy policy</a>*</label>
-                        <span class="form-error" id="privacyError"></span>
-                    </div>
-                    
-                    <button type="submit" class="btn submit-btn">
-                        <span class="btn-text">Invia Richiesta</span>
-                        <span class="btn-icon"><i class="fa-solid fa-paper-plane"></i></span>
-                    </button>
-                    
-                    <div class="form-feedback success" id="formSuccess">
-                        <i class="fa-solid fa-check-circle"></i>
-                        <p>Messaggio inviato con successo! Ti risponderemo presto.</p>
-                    </div>
-                    
-                    <div class="form-feedback error" id="formError">
-                        <i class="fa-solid fa-exclamation-circle"></i>
-                        <p>Si è verificato un errore. Riprova più tardi o contattaci direttamente.</p>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -380,5 +392,6 @@
     <script src="scripts/popups.js"></script>
     <script src="scripts/typewriter.js"></script>
     <script src="scripts/splash.js"></script>
+    <script src="scripts/heading-animations.js"></script>
 </body>
 </html>

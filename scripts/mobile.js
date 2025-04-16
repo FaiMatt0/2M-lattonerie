@@ -1,271 +1,265 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize Swiper
-  const swiper = new Swiper('.swiper-container', {
-      direction: 'horizontal',
-      slidesPerView: 1,
-      spaceBetween: 0,
-      grabCursor: true,
-      allowTouchMove: true,
-      resistance: true,
-      resistanceRatio: 0,
-      speed: 300,
-      hashNavigation: {
-          watchState: true,
-      },
-      pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-          dynamicBullets: true,
-      },
-      keyboard: {
-          enabled: true,
-          onlyInViewport: false,
-      },
-  });
-  
-  // Make swiper globally available
-  window.swiper = swiper;
-  
-  // Add functionality for the about page animation
-  if (swiper) {
-    swiper.on('slideChange', function() {
-      // If navigating to slide index 1 (about page)
-      if (this.activeIndex === 1 && window.runAboutAnimation) {
-        window.runAboutAnimation();
-      }
+    // Initialize Swiper and expose it globally for other scripts
+    window.mySwiper = new Swiper('.swiper-container', {
+        direction: 'horizontal',
+        slidesPerView: 1,
+        spaceBetween: 0,
+        mousewheel: true,
+        keyboard: {
+            enabled: true,
+        },
+        hashNavigation: {
+            watchState: true,
+        },
+        // Remove pagination reference since we removed it from the HTML
     });
     
-    // Run animation if already on the about page
-    if (swiper.activeIndex === 1 && window.runAboutAnimation) {
-      window.runAboutAnimation();
+    // Expose the Swiper instance directly on the container element too
+    document.querySelector('.swiper-container').swiper = window.mySwiper;
+
+    // Make swiper globally available
+    window.swiper = window.mySwiper;
+  
+    // Add functionality for the about page animation
+    if (window.mySwiper) {
+        window.mySwiper.on('slideChange', function() {
+            // If navigating to slide index 1 (about page)
+            if (this.activeIndex === 1 && window.runAboutAnimation) {
+                window.runAboutAnimation();
+            }
+        });
+        
+        // Run animation if already on the about page
+        if (window.mySwiper.activeIndex === 1 && window.runAboutAnimation) {
+            window.runAboutAnimation();
+        }
     }
-  }
   
-  // Create lightbox elements
-  const lightbox = document.createElement('div');
-  lightbox.className = 'gallery-lightbox';
+    // Create lightbox elements
+    const lightbox = document.createElement('div');
+    lightbox.className = 'gallery-lightbox';
   
-  const lightboxContent = document.createElement('div');
-  lightboxContent.className = 'lightbox-content';
+    const lightboxContent = document.createElement('div');
+    lightboxContent.className = 'lightbox-content';
   
-  const lightboxImg = document.createElement('img');
-  lightboxImg.alt = 'Gallery image';
+    const lightboxImg = document.createElement('img');
+    lightboxImg.alt = 'Gallery image';
   
-  const lightboxCaption = document.createElement('div');
-  lightboxCaption.className = 'lightbox-caption';
+    const lightboxCaption = document.createElement('div');
+    lightboxCaption.className = 'lightbox-caption';
   
-  const closeBtnLightbox = document.createElement('button');
-  closeBtnLightbox.className = 'lightbox-close';
-  closeBtnLightbox.innerHTML = '&times;';
+    const closeBtnLightbox = document.createElement('button');
+    closeBtnLightbox.className = 'lightbox-close';
+    closeBtnLightbox.innerHTML = '&times;';
   
-  const lightboxControls = document.createElement('div');
-  lightboxControls.className = 'lightbox-controls';
+    const lightboxControls = document.createElement('div');
+    lightboxControls.className = 'lightbox-controls';
   
-  const prevBtn = document.createElement('button');
-  prevBtn.className = 'lightbox-control';
-  prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'lightbox-control';
+    prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
   
-  const nextBtn = document.createElement('button');
-  nextBtn.className = 'lightbox-control';
-  nextBtn.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'lightbox-control';
+    nextBtn.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
   
-  lightboxControls.appendChild(prevBtn);
-  lightboxControls.appendChild(nextBtn);
+    lightboxControls.appendChild(prevBtn);
+    lightboxControls.appendChild(nextBtn);
   
-  lightboxContent.appendChild(lightboxImg);
-  lightboxContent.appendChild(lightboxCaption);
+    lightboxContent.appendChild(lightboxImg);
+    lightboxContent.appendChild(lightboxCaption);
   
-  lightbox.appendChild(closeBtnLightbox);
-  lightbox.appendChild(lightboxContent);
-  lightbox.appendChild(lightboxControls);
+    lightbox.appendChild(closeBtnLightbox);
+    lightbox.appendChild(lightboxContent);
+    lightbox.appendChild(lightboxControls);
   
-  document.body.appendChild(lightbox);
+    document.body.appendChild(lightbox);
   
-  // Gallery functionality
-  const galleryItems = document.querySelectorAll('.gallery-item');
-  let currentIndex = 0;
+    // Gallery functionality
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    let currentIndex = 0;
   
-  // Show image in lightbox
-  function showImage(index) {
-      currentIndex = index;
-      const galleryItem = galleryItems[index];
-      const imgSrc = galleryItem.getAttribute('data-img');
-      const imgCaption = galleryItem.getAttribute('data-caption');
-      
-      // First set image src and caption
-      lightboxImg.src = 'images/' + imgSrc;
-      lightboxCaption.textContent = imgCaption;
-      
-      // Add active class to show the lightbox
-      lightbox.classList.add('active');
-      
-      // Disable swiper and body scroll
-      if (window.swiper) {
-          window.swiper.allowTouchMove = false;
-      }
-      
-      // Save scroll position
-      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.top = `-${scrollPosition}px`;
-      document.body.style.overflow = 'hidden';
-  }
+    // Show image in lightbox
+    function showImage(index) {
+        currentIndex = index;
+        const galleryItem = galleryItems[index];
+        const imgSrc = galleryItem.getAttribute('data-img');
+        const imgCaption = galleryItem.getAttribute('data-caption');
+        
+        // First set image src and caption
+        lightboxImg.src = 'images/' + imgSrc;
+        lightboxCaption.textContent = imgCaption;
+        
+        // Add active class to show the lightbox
+        lightbox.classList.add('active');
+        
+        // Disable swiper and body scroll
+        if (window.mySwiper) {
+            window.mySwiper.allowTouchMove = false;
+        }
+        
+        // Save scroll position
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.overflow = 'hidden';
+    }
   
-  // Close lightbox
-  function closeLightbox() {
-      lightbox.classList.remove('active');
-      
-      // Get the scroll position
-      const scrollPosition = parseInt(document.body.style.top || '0') * -1;
-      
-      // Re-enable swiper and body scroll
-      setTimeout(() => {
-          if (window.swiper) {
-              window.swiper.allowTouchMove = true;
-          }
-          
-          document.body.style.position = '';
-          document.body.style.width = '';
-          document.body.style.top = '';
-          document.body.style.overflow = '';
-          
-          // Restore scroll position
-          window.scrollTo(0, scrollPosition);
-      }, 300);
-  }
+    // Close lightbox
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        
+        // Get the scroll position
+        const scrollPosition = parseInt(document.body.style.top || '0') * -1;
+        
+        // Re-enable swiper and body scroll
+        setTimeout(() => {
+            if (window.mySwiper) {
+                window.mySwiper.allowTouchMove = true;
+            }
+            
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.top = '';
+            document.body.style.overflow = '';
+            
+            // Restore scroll position
+            window.scrollTo(0, scrollPosition);
+        }, 300);
+    }
   
-  // Navigate to previous image
-  function prevImage() {
-      currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-      const galleryItem = galleryItems[currentIndex];
-      const imgSrc = galleryItem.getAttribute('data-img');
-      const imgCaption = galleryItem.getAttribute('data-caption');
-      
-      // Animate transition
-      lightboxContent.style.transform = 'translateX(-10px)';
-      lightboxContent.style.opacity = '0.5';
-      
-      setTimeout(() => {
-          lightboxImg.src = 'images/' + imgSrc;
-          lightboxCaption.textContent = imgCaption;
-          
-          lightboxContent.style.transform = 'translateX(0)';
-          lightboxContent.style.opacity = '1';
-      }, 150);
-  }
+    // Navigate to previous image
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        const galleryItem = galleryItems[currentIndex];
+        const imgSrc = galleryItem.getAttribute('data-img');
+        const imgCaption = galleryItem.getAttribute('data-caption');
+        
+        // Animate transition
+        lightboxContent.style.transform = 'translateX(-10px)';
+        lightboxContent.style.opacity = '0.5';
+        
+        setTimeout(() => {
+            lightboxImg.src = 'images/' + imgSrc;
+            lightboxCaption.textContent = imgCaption;
+            
+            lightboxContent.style.transform = 'translateX(0)';
+            lightboxContent.style.opacity = '1';
+        }, 150);
+    }
   
-  // Navigate to next image
-  function nextImage() {
-      currentIndex = (currentIndex + 1) % galleryItems.length;
-      const galleryItem = galleryItems[currentIndex];
-      const imgSrc = galleryItem.getAttribute('data-img');
-      const imgCaption = galleryItem.getAttribute('data-caption');
-      
-      // Animate transition
-      lightboxContent.style.transform = 'translateX(10px)';
-      lightboxContent.style.opacity = '0.5';
-      
-      setTimeout(() => {
-          lightboxImg.src = 'images/' + imgSrc;
-          lightboxCaption.textContent = imgCaption;
-          
-          lightboxContent.style.transform = 'translateX(0)';
-          lightboxContent.style.opacity = '1';
-      }, 150);
-  }
+    // Navigate to next image
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        const galleryItem = galleryItems[currentIndex];
+        const imgSrc = galleryItem.getAttribute('data-img');
+        const imgCaption = galleryItem.getAttribute('data-caption');
+        
+        // Animate transition
+        lightboxContent.style.transform = 'translateX(10px)';
+        lightboxContent.style.opacity = '0.5';
+        
+        setTimeout(() => {
+            lightboxImg.src = 'images/' + imgSrc;
+            lightboxCaption.textContent = imgCaption;
+            
+            lightboxContent.style.transform = 'translateX(0)';
+            lightboxContent.style.opacity = '1';
+        }, 150);
+    }
   
-  // Event listeners
-  closeBtnLightbox.addEventListener('click', closeLightbox);
-  prevBtn.addEventListener('click', prevImage);
-  nextBtn.addEventListener('click', nextImage);
+    // Event listeners
+    closeBtnLightbox.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
   
-  // Close on Escape key
-  document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-          closeLightbox();
-      } else if (e.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
-          prevImage();
-      } else if (e.key === 'ArrowRight' && lightbox.classList.contains('active')) {
-          nextImage();
-      }
-  });
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        } else if (e.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+            prevImage();
+        } else if (e.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+            nextImage();
+        }
+    });
   
-  // Close on overlay click
-  lightbox.addEventListener('click', function(e) {
-      if (e.target === lightbox) {
-          closeLightbox();
-      }
-  });
+    // Close on overlay click
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
   
-  // Add tap/click event to gallery items
-  galleryItems.forEach((item, index) => {
-      item.addEventListener('click', function() {
-          showImage(index);
-      });
-      
-      // Create ripple effect on tap
-      item.addEventListener('touchstart', function(e) {
-          const rect = item.getBoundingClientRect();
-          const x = e.touches[0].clientX - rect.left;
-          const y = e.touches[0].clientY - rect.top;
-          
-          const ripple = document.createElement('span');
-          ripple.classList.add('ripple');
-          ripple.style.left = `${x}px`;
-          ripple.style.top = `${y}px`;
-          
-          item.appendChild(ripple);
-          
-          setTimeout(() => {
-              ripple.remove();
-          }, 500);
-      });
-  });
+    // Add tap/click event to gallery items
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', function() {
+            showImage(index);
+        });
+        
+        // Create ripple effect on tap
+        item.addEventListener('touchstart', function(e) {
+            const rect = item.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const y = e.touches[0].clientY - rect.top;
+            
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            
+            item.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 500);
+        });
+    });
   
-  // Add swipe functionality to lightbox
-  let touchStartX = 0;
-  let touchEndX = 0;
+    // Add swipe functionality to lightbox
+    let touchStartX = 0;
+    let touchEndX = 0;
   
-  lightbox.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-  });
+    lightbox.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
   
-  lightbox.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-  });
+    lightbox.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
   
-  function handleSwipe() {
-      if (touchEndX < touchStartX - 50) { // Swipe left
-          nextImage();
-      }
-      if (touchEndX > touchStartX + 50) { // Swipe right
-          prevImage();
-      }
-  }
+    function handleSwipe() {
+        if (touchEndX < touchStartX - 50) { // Swipe left
+            nextImage();
+        }
+        if (touchEndX > touchStartX + 50) { // Swipe right
+            prevImage();
+        }
+    }
   
-  // Add the fade-in animation to gallery items
-  function addFadeAnimation() {
-      galleryItems.forEach(item => {
-          const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                      item.style.visibility = 'visible';
-                      item.style.animation = item.dataset.animation || 'fadeIn 0.5s ease forwards';
-                      observer.unobserve(item);
-                  }
-              });
-          }, {
-              threshold: 0.1
-          });
-          
-          observer.observe(item);
-      });
-  }
+    // Add the fade-in animation to gallery items
+    function addFadeAnimation() {
+        galleryItems.forEach(item => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        item.style.visibility = 'visible';
+                        item.style.animation = item.dataset.animation || 'fadeIn 0.5s ease forwards';
+                        observer.unobserve(item);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            observer.observe(item);
+        });
+    }
   
-  // Call the function to initialize the animations
-  addFadeAnimation();
+    // Call the function to initialize the animations
+    addFadeAnimation();
 });
 
 // Add ripple effect styles

@@ -12,9 +12,19 @@
         <link rel="icon" href="images/minilogonobg.png" type="image/png">
     </head>
     <body>
+        <!-- Splash Screen with Video -->
+        <div id="splash-screen" class="splash-screen">
+            <div class="splash-content">
+                <video id="intro-video" autoplay muted>
+                    <source src="videos/video_desktop.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        
         <main>
             <aside>
-                <div class="aside-logo animate__animated animate__zoomInDown">
+                <div class="aside-logo animate__animated animate__zoomInDown" data-animation-class="aside-logo animate__animated animate__zoomInDown">
                     <img src="images/minilogonobg.png" alt="2M Lattonerie Logo">
                 </div>
                 <ul class="Links">
@@ -38,7 +48,7 @@
             <div class="swiper mySwiper">
                 <div class="SlideContainer swiper-wrapper">
                     <div class="swiper-slide home-slide">
-                        <div class="HomeContent animate__animated animate__backInLeft">
+                        <div class="HomeContent animate__animated animate__backInLeft" data-animation-class="HomeContent animate__animated animate__backInLeft">
                             <h1>"Da anni al vostro fianco, con <span class="stylized-name">PRECISIONE E QUALITÀ</span>,</h1>
                             <h2>per lavorazioni che <span class="proffesions">SFIDANO IL TEMPO"</span></h2>
                             <div class="buttonGroup">
@@ -46,12 +56,12 @@
                                 <button class="contattaci-btn" onclick="Navigate(4)">Contattaci</button>
                             </div>
                         </div>
-                        <div class="SideImg ">
+                        <div class="SideImg">
                             <div class="top-right-corner">
                                 <hr class="hr1">
                                 <hr class="hr2">
                             </div>
-                            <img src="./images/logo lattonerie.jpg" alt="Logo Lattonerie" style="max-width: 100%; height: auto;" class="animate__animated animate__flipInY">
+                            <img src="./images/logo lattonerie.jpg" alt="Logo Lattonerie" style="max-width: 100%; height: auto;" class="animate__animated animate__flipInY" data-animation-class="animate__animated animate__flipInY">
                             <div class="bottom-left-corner">
                                 <hr class="hr1">
                                 <hr class="hr2">
@@ -62,7 +72,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="about-us">
-                            <h1 class="heading">"La nostra STORIA"</h1>
+                            <h1 class="heading section-title animate__animated">"La nostra STORIA"</h1>
                             <p class="aboutme-deatils">
                                 <p style="font-size: 1.2em; font-family: 'Roboto Condensed', sans-serif; line-height: 1.8em;" class="about-text-line" data-delay="0.2">
                                     <em>"Da piu di 20 anni offriamo soluzioni personalizzate per soddisfare ogni esigenza, garantendo qualità, precisione e durata nel tempo.</em>
@@ -120,7 +130,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="services">
-                            <h1 class="heading">"I nostri servizi"</h1>
+                            <h1 class="heading section-title animate__animated">"I nostri servizi"</h1>
                             <div class="service" onclick="OpenService(0)">
                                 <div class="service-icon"><img src="images/casa animata.gif" alt="Animated House" class="animated-icon"></div>
                                 <h2>Coperture civili e industriali</h2>
@@ -153,7 +163,7 @@
                         </div>
                     </div>
                     <div class="swiper-slide gallery">
-                        <h1 class="heading">"I nostri LAVORI"</h1>
+                        <h1 class="heading section-title animate__animated">"I nostri LAVORI"</h1>
                         <div class="gallery-container">
                             <!-- Prima riga -->
                             <div class="gallery-row top-row">
@@ -195,7 +205,7 @@
                     </div>
 
                     <div class="swiper-slide contactMe">
-                        <h1 class="heading">Contatti</h1>
+                        <h1 class="heading section-title animate__animated">Contattaci</h1>
                         <div class="contactinfo-container">
                             <div class="contactinfo"><img src="images/telefono animata.gif" alt="Telefono" class="animated-icon">
                                 <h3>Telefono</h3>
@@ -266,5 +276,6 @@
         <script src="scripts/cookies.js"></script>
         <script src="scripts/form-animations.js"></script>
         <script src="scripts/splash.js"></script>
+        <script src="scripts/heading-animations.js"></script>
     </body>
 </html>

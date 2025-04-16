@@ -1,4 +1,5 @@
-var swiper = new Swiper(".swiper", {
+// Initialize Swiper
+var swiper = new Swiper(".mySwiper", {
     effect: "cube",
     allowTouchMove: false,
     grabCursor: false,
@@ -11,24 +12,31 @@ var swiper = new Swiper(".swiper", {
     mousewheel: true
 });
 
+// Expose the swiper instance
+document.querySelector('.mySwiper').swiper = swiper;
+
 swiper.on('slideChange', function () {
     for (let i of document.querySelectorAll(".Links li")) i.classList.remove("activeLink")
     Array.from(document.querySelectorAll(".Links li"))[swiper.activeIndex].classList.add("activeLink")
-
 });
 
-function Navigate(indx) {
+function Navigate(index) {
     for (let i of document.querySelectorAll(".Links li")) i.classList.remove("activeLink")
-    Array.from(document.querySelectorAll(".Links li"))[indx].classList.add("activeLink")
-    swiper.slideTo(indx, 1000, true)
+    Array.from(document.querySelectorAll(".Links li"))[index].classList.add("activeLink")
+    swiper.slideTo(index, 1000, true)
     
     // Dispatch a custom event that our typewriter.js can listen for
     document.dispatchEvent(new CustomEvent('swiperNavigate', { 
-        detail: indx 
+        detail: index 
     }));
     
+    // Manually dispatch event after a small delay
+    setTimeout(function() {
+        swiper.emit('slideChange');
+    }, 50);
+    
     // If navigating directly to about page, run animation
-    if (indx === 1 && window.runAboutAnimation) {
+    if (index === 1 && window.runAboutAnimation) {
         window.runAboutAnimation();
     }
 }

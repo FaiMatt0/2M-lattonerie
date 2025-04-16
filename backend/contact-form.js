@@ -1,4 +1,4 @@
-// Simplified contact form handler
+// Enhanced contact form handler that works with both desktop and mobile forms
 document.addEventListener('DOMContentLoaded', function() {
     // Get both form elements
     const desktopForm = document.querySelector('.contactMe form');
@@ -29,35 +29,108 @@ document.addEventListener('DOMContentLoaded', function() {
         let formData = {};
         
         if (isDesktopForm) {
-            // Desktop form (simple version)
-            const inputs = form.querySelectorAll('input, textarea');
+            // Desktop form - Specific fix for the desktop form issue
+            // Get the inputs in the exact order they appear in the form
+            const allInputs = Array.from(form.querySelectorAll('input, textarea, select'));
+            console.log('Found', allInputs.length, 'input elements');
+            
+            // The exact mapping for the desktop form based on your HTML structure
+            // Note: We're now explicitly using array indexes rather than attributes
+            // to ensure we get the correct fields in the right order
+            const nameInput = form.querySelector('input[placeholder="Il tuo nome"]');
+            const subjectSelect = form.querySelector('select#subject');
+            const phoneInput = form.querySelector('input[type="tel"]');
+            const emailInput = form.querySelector('input[type="email"]');
+            const messageInput = form.querySelector('textarea');
+            
+            // Log the found inputs for debugging
+            console.log('Found inputs:');
+            console.log('- Name input:', nameInput ? 'Yes' : 'No');
+            console.log('- Subject select:', subjectSelect ? 'Yes' : 'No');
+            console.log('- Phone input:', phoneInput ? 'Yes' : 'No');
+            console.log('- Email input:', emailInput ? 'Yes' : 'No');
+            console.log('- Message input:', messageInput ? 'Yes' : 'No');
+            
+            // Collect form data based on the exact order of inputs
             formData = {
-                name: inputs[0].value.trim(),
-                email: inputs[1].value.trim(),
-                message: inputs[2].value.trim(),
-                subject: 'informazioni'
+                name: nameInput ? nameInput.value.trim() : '',
+                email: emailInput ? emailInput.value.trim() : '',
+                phone: phoneInput ? phoneInput.value.trim() : '',
+                subject: subjectSelect ? subjectSelect.value : 'informazioni',
+                message: messageInput ? messageInput.value.trim() : '',
+                privacy: true // Assume consent for desktop form
             };
-            console.log('Desktop form data:', formData);
+            
+            // IMPORTANT FIX: If email contains just numbers (like a phone number)
+            // and message contains what looks like an email, swap them
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /^[0-9+\s()-]{5,20}$/;
+            
+            if (formData.email && phoneRegex.test(formData.email) && 
+                formData.message && emailRegex.test(formData.message)) {
+                console.log('FIXING DATA: Email field contains phone, message contains email');
+                // Save email from message
+                const correctEmail = formData.message;
+                // Save phone from email field
+                const correctPhone = formData.email;
+                // Update values
+                formData.email = correctEmail;
+                formData.phone = correctPhone;
+                formData.message = ''; // Clear message since it contained the email
+            }
+            
+            console.log('Desktop form data correctly mapped:', formData);
         } else {
-            // Mobile form
+            // Mobile form (structure from mobile.html)
+            // Using IDs which are more reliable for the mobile form
             formData = {
                 name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                phone: document.getElementById('phone') ? document.getElementById('phone').value.trim() : '',
-                subject: document.getElementById('subject') ? document.getElementById('subject').value : 'informazioni',
+                email: document.getElementById('email').value.trim(), 
+                phone: document.getElementById('phone')?.value.trim() || '',
+                subject: document.getElementById('subject')?.value || 'informazioni',
                 message: document.getElementById('message').value.trim(),
-                privacy: document.getElementById('privacy') ? document.getElementById('privacy').checked : true
+                privacy: document.getElementById('privacy')?.checked || false
             };
+            
+            // Apply the same smart correction for mobile form
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /^[0-9+\s()-]{5,20}$/;
+            
+            if (formData.email && phoneRegex.test(formData.email) && 
+                formData.message && emailRegex.test(formData.message)) {
+                console.log('FIXING DATA: Email field contains phone, message contains email');
+                const correctEmail = formData.message;
+                const correctPhone = formData.email;
+                formData.email = correctEmail;
+                formData.phone = correctPhone;
+                formData.message = '';
+            }
+            
             console.log('Mobile form data:', formData);
         }
         
+        // Form validation
+        if (!validateForm(formData, isDesktopForm)) {
+            return false;
+        }
+        
         // Disable submit button and show loading state
-        const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('.primary');
+        const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('.primary') || form.querySelector('.submit-btn');
         const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
         
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Invio in corso...';
+            if (isDesktopForm) {
+                submitBtn.innerHTML = 'Invio in corso...';
+            } else {
+                // For mobile, we need to handle the button which has a more complex structure
+                const btnText = submitBtn.querySelector('.btn-text');
+                if (btnText) {
+                    btnText.innerText = 'Invio in corso...';
+                } else {
+                    submitBtn.innerHTML = 'Invio in corso...';
+                }
+            }
         }
         
         // Determine the base URL
@@ -93,20 +166,124 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log('Email endpoint response:', data);
             
-            // Show success message
-            alert('Messaggio inviato con successo!');
-            form.reset();
+            // Show success message based on form type
+            if (isDesktopForm) {
+                alert('Messaggio inviato con successo!');
+                form.reset();
+            } else {
+                // For mobile form, use the built-in success feedback
+                const formSuccess = document.getElementById('formSuccess');
+                const formError = document.getElementById('formError');
+                
+                if (formSuccess) {
+                    formSuccess.style.display = 'flex';
+                    formError.style.display = 'none';
+                    form.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        formSuccess.style.display = 'none';
+                    }, 5000);
+                } else {
+                    alert('Messaggio inviato con successo!');
+                    form.reset();
+                }
+            }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Errore durante l\'invio: ' + error.message);
+            
+            if (isDesktopForm) {
+                alert('Errore durante l\'invio: ' + error.message);
+            } else {
+                // For mobile form, use the built-in error feedback
+                const formSuccess = document.getElementById('formSuccess');
+                const formError = document.getElementById('formError');
+                const errorMessage = document.querySelector('#formError p');
+                
+                if (formError) {
+                    formError.style.display = 'flex';
+                    formSuccess.style.display = 'none';
+                    
+                    if (errorMessage) {
+                        errorMessage.textContent = 'Si è verificato un errore: ' + error.message;
+                    }
+                    
+                    // Hide error message after 5 seconds
+                    setTimeout(() => {
+                        formError.style.display = 'none';
+                    }, 5000);
+                } else {
+                    alert('Errore durante l\'invio: ' + error.message);
+                }
+            }
         })
         .finally(() => {
             // Re-enable submit button
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
+                if (isDesktopForm) {
+                    submitBtn.innerHTML = originalBtnText;
+                } else {
+                    // For mobile, we need to handle the button which has a more complex structure
+                    const btnText = submitBtn.querySelector('.btn-text');
+                    if (btnText) {
+                        btnText.innerText = 'Invia Richiesta';
+                    } else {
+                        submitBtn.innerHTML = originalBtnText;
+                    }
+                }
             }
         });
+    }
+    
+    function validateForm(formData, isDesktopForm) {
+        let isValid = true;
+        
+        // Clear previous error messages
+        if (!isDesktopForm) {
+            document.querySelectorAll('.form-error').forEach(element => {
+                element.textContent = '';
+            });
+        }
+        
+        // Validate name
+        if (!formData.name) {
+            isValid = false;
+            if (!isDesktopForm) {
+                document.getElementById('nameError').textContent = 'Il nome è obbligatorio';
+            }
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email) {
+            isValid = false;
+            if (!isDesktopForm) {
+                document.getElementById('emailError').textContent = 'L\'email è obbligatoria';
+            }
+        } else if (!emailRegex.test(formData.email)) {
+            isValid = false;
+            if (!isDesktopForm) {
+                document.getElementById('emailError').textContent = 'Inserisci un indirizzo email valido';
+            }
+        }
+        
+        // We won't validate the message for this fix, since we might be 
+        // using the message field to extract the email in some cases
+        
+        // Validate privacy checkbox (only for mobile form)
+        if (!isDesktopForm && !formData.privacy) {
+            isValid = false;
+            document.getElementById('privacyError').textContent = 'Devi accettare la privacy policy';
+        }
+        
+        // If not valid and desktop form, show alert
+        if (!isValid && isDesktopForm) {
+            alert('Per favore, compila tutti i campi obbligatori correttamente.');
+        }
+        
+        console.log('Form validation result:', isValid);
+        return isValid;
     }
 });

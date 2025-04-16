@@ -38,13 +38,77 @@ app.post('/send-email', async (req, res) => {
   console.log(JSON.stringify(req.body, null, 2));
   
   try {
-    const { name, email, phone, subject, message, privacy } = req.body;
+    // Get original data
+    let { name, email, phone, subject, message, privacy } = req.body;
 
     // Basic validation
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: 'Required fields missing' });
+    if (!name) {
+      return res.status(400).json({ error: 'Nome è obbligatorio' });
     }
 
+    // Log the exact format of the data we're receiving
+    console.log('Email data as received:');
+    console.log(`- Name: "${name}"`);
+    console.log(`- Email: "${email}"`);
+    console.log(`- Phone: "${phone}"`);
+    console.log(`- Subject: "${subject}"`);
+    console.log(`- Message: "${message}"`);
+    
+    // PATTERN DETECTION - Fix the exact pattern you're experiencing
+    // If email contains just numbers and message contains an email address, swap them
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9+\s()-]{5,20}$/;
+    
+    // Check for specific pattern: numeric email + email-looking message
+    if (email && phoneRegex.test(email) && message && emailRegex.test(message)) {
+      console.log('DETECTED PATTERN: Email field contains phone number, message contains email');
+      // Move the email address from message to email field
+      const correctEmail = message;
+      // Move phone number from email field to phone field
+      const correctPhone = email;
+      // Clear the message field
+      message = '';
+      
+      // Update the values
+      email = correctEmail;
+      phone = correctPhone;
+      
+      console.log('CORRECTED DATA:');
+      console.log(`- Email: "${email}"`);
+      console.log(`- Phone: "${phone}"`);
+      console.log(`- Message: "${message}"`);
+    }
+    
+    // Additional check: If email still doesn't look like valid email, try to find it elsewhere
+    if (!emailRegex.test(email)) {
+      // Check if phone contains an email
+      if (phone && emailRegex.test(phone)) {
+        console.log('Found email in phone field, swapping...');
+        const temp = email;
+        email = phone;
+        phone = temp;
+      } 
+      // Check if message contains an email pattern
+      else if (message) {
+        const emailMatch = message.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/);
+        if (emailMatch) {
+          console.log('Found email in message, extracting...');
+          const extractedEmail = emailMatch[0];
+          message = message.replace(extractedEmail, '').trim();
+          
+          // If the current email field contains a phone number, save it
+          if (phoneRegex.test(email)) {
+            phone = email;
+          }
+          
+          email = extractedEmail;
+        }
+      }
+    }
+
+    // Default subject if not provided
+    subject = subject || 'Messaggio dal sito web';
+    
     // Create transporter with same settings as test-email.js
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
@@ -64,32 +128,28 @@ app.post('/send-email', async (req, res) => {
     console.log('Verifying SMTP connection...');
     await transporter.verify();
     console.log('SMTP connection verified');
-
-    // Default subject if not provided
-    const emailSubject = subject || 'Messaggio dal sito web';
     
-    // Simplified email options
     const mailOptions = {
       from: `"Modulo di Contatto" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_RECEIVER,
-      subject: `Messaggio da ${name} - ${emailSubject}`,
+      subject: `Messaggio da ${name} - ${subject}`,
       text: `
         Nome: ${name}
-        Email: ${email}
-        ${phone ? `Telefono: ${phone}` : ''}
+        Email: ${email || 'Non specificato'}
+        Telefono: ${phone || 'Non specificato'}
         Oggetto: ${subject || 'Non specificato'}
         Messaggio:
-        ${message}
+        ${message || 'Nessun messaggio'}
       `,
       html: `
 <div style="font-family: Arial, sans-serif; padding: 20px;">
   <h2>Nuovo messaggio dal sito web</h2>
   <p><strong>Nome:</strong> ${name}</p>
-  <p><strong>Email:</strong> ${email}</p>
-  ${phone ? `<p><strong>Telefono:</strong> ${phone}</p>` : ''}
+  <p><strong>Email:</strong> ${email || 'Non specificato'}</p>
+  <p><strong>Telefono:</strong> ${phone || 'Non specificato'}</p>
   <p><strong>Oggetto:</strong> ${subject || 'Non specificato'}</p>
   <h3>Messaggio:</h3>
-  <p>${message.replace(/\n/g, '<br>')}</p>
+  <p>${(message || 'Nessun messaggio').replace(/\n/g, '<br>')}</p>
 </div>
       `
     };
