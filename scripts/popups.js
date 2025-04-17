@@ -83,6 +83,12 @@ document.addEventListener('DOMContentLoaded', function() {
         companiesGrid.appendChild(companyItem);
     });
     
+    // Aggiungi "e molte altre..." alla fine della griglia delle aziende
+    const moreCompaniesText = document.createElement('div');
+    moreCompaniesText.className = 'more-companies';
+    moreCompaniesText.textContent = 'e molte altre...';
+    companiesGrid.appendChild(moreCompaniesText);
+    
     companiesBody.appendChild(companiesGrid);
     companiesPopupContent.appendChild(closeCompaniesBtn);
     companiesPopupContent.appendChild(companiesTitle);
@@ -211,6 +217,16 @@ document.addEventListener('DOMContentLoaded', function() {
             background-color: #f5f5f5;
             width: 100%;
             border-top: 1px solid #eee;
+        }
+        
+        .more-companies {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-style: italic;
+            color: #293133;
+            margin-top: 10px;
+            font-size: 18px;
+            padding: 10px;
         }
         
         @media (min-width: 480px) {
