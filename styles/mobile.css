@@ -1286,6 +1286,10 @@ select:valid:not([value=""]) {
     font-size: 0.9rem;
 }
 
+.quick-contact:hover {
+    color: #f39c12;
+}
+
 .quick-contact i {
     margin-right: 8px;
 }

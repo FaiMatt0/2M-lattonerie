@@ -5,12 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileNav = document.getElementById('mobileNav');
     const navOverlay = document.getElementById('navOverlay');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navLogo = document.querySelector('.nav-logo');
     
     // Open menu function
     function openMenu() {
         mobileNav.classList.add('open');
         navOverlay.classList.add('open');
         document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        
+        // Remove any existing animation classes and add the animation classes when menu opens
+        navLogo.classList.remove('animate__animated', 'animate__zoomInDown');
+        // Force a reflow to restart the animation
+        void navLogo.offsetWidth;
+        // Add animation classes
+        navLogo.classList.add('animate__animated', 'animate__zoomInDown');
     }
     
     // Close menu function
@@ -54,6 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initial active link
     updateActiveNav();
+    
+    // Initially remove animation classes from logo
+    navLogo.classList.remove('animate__animated', 'animate__zoomInDown');
     
     // Update the menu based on swiper's active slide
     if (typeof swiper !== 'undefined') {
