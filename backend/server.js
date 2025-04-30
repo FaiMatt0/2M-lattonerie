@@ -6,10 +6,12 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+console.log(`Server will run on internal port ${PORT}`);
 
 // Middleware - more permissive for testing
 app.use(cors({
-  origin: '*', // Allow all origins during testing
+  // Update with your actual frontend domain(s)
+  origin: ['https://2m-lattonerie.it'],
   methods: ['POST', 'GET', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Determine the base URL
-        const baseUrl = 'http://localhost:3000';
+        const baseUrl = 'http://185.221.173.116:3000';
         
         // First, try the debug endpoint to verify form data is being received
         console.log('Sending to debug endpoint...');
