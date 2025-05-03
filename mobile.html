@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <script>
+        function checkAndRedirect() {
+            if (window.innerWidth >= 768) {
+                // Store current hash to maintain section
+                const currentHash = window.location.hash;
+                window.location.href = 'index.html' + currentHash;
+            }
+        }
+        
+        // Check on page load
+        window.addEventListener('load', checkAndRedirect);
+        
+        // Check on resize with debounce
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(checkAndRedirect, 250);
+        });
+    </script>
     <title>2M Lattonerie SRLS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
